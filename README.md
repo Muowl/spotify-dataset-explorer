@@ -2,7 +2,7 @@
 
 Repo simples para estudar e visualizar a base [Spotify Tracks Dataset](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset).
 
-Usado no TCC de Sistemas de Informacao (UFJF) so como apoio para entender a base (gêneros, audio features, popularity etc.).
+Usado no TCC de Sistemas de Informacao (UFJF) so como apoio para entender a base (generos, audio features, popularity etc.).
 
 ## Visualizar
 
