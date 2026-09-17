@@ -16,14 +16,20 @@
   .card { background: var(--card); border-radius: 10px; padding: 1.25rem 1.4rem; margin-bottom: 1.4rem;
            box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
   h2 { margin-top: 0; font-size: 1.25rem; border-bottom: 2px solid var(--spotify); padding-bottom: 0.35rem; display: inline-block; }
+  h3 { margin: 1.1rem 0 0.4rem; font-size: 1rem; }
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.9rem; }
   .stat { background: #f0faf3; border-left: 4px solid var(--spotify); padding: 0.8rem 1rem; border-radius: 6px; }
   .stat strong { display: block; font-size: 1.35rem; color: #191414; }
   .stat span { font-size: 0.85rem; color: var(--muted); }
+  .method { background: #f6f8f7; border-left: 4px solid #191414; padding: 0.85rem 1rem; border-radius: 6px; margin: 0.8rem 0; }
+  .method strong { display: block; margin-bottom: 0.25rem; }
+  .method p { margin: 0.25rem 0; }
+  .method ul { margin: 0.45rem 0 0.15rem 1.1rem; padding: 0; }
   img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 0.6rem; }
   footer { text-align: center; padding: 1.5rem; color: var(--muted); font-size: 0.85rem; }
   a { color: var(--spotify); }
   .note { font-size: 0.9rem; color: var(--muted); }
+  code { background: #efefef; padding: 0.08rem 0.28rem; border-radius: 4px; }
 </style>
 </head>
 <body>
@@ -41,46 +47,82 @@
     <div class="stat"><strong>31,437</strong><span>artistas / combinações de artistas</span></div>
     <div class="stat"><strong>8.6%</strong><span>tracks marcadas como explicit</span></div>
   </div>
+  <div class="method">
+    <strong>Procedimento de preparação</strong>
+    <p>O CSV original possui 114.000 linhas. A análise remove a coluna de índice exportada (<code>Unnamed: 0</code>, quando presente) e elimina duplicatas com base em <code>track_id</code>, resultando em 89.741 faixas únicas.</p>
+    <p>As análises abaixo são descritivas e exploratórias: procuram caracterizar a base e identificar relações entre atributos, sem interpretar correlação como causalidade.</p>
+  </div>
   <p class="note" style="margin-top:1rem">Fonte: <a href="https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset" target="_blank">Kaggle - Spotify Tracks Dataset</a> (também no Hugging Face). Coletado via Spotify Web API. Linhas originais: 114,000. Duplicatas de <code>track_id</code> removidas: 24,259. Valores faltantes: artists: 1, album_name: 1, track_name: 1.</p>
 </div>
 
 <div class="card">
   <h2>2. Distribuição de gêneros (Top 20)</h2>
-  <p class="note">A base cobre muitos gêneros com contagens relativamente equilibradas no topo. Relevante para modelos de recomendação baseados em conteúdo / gênero.</p>
+  <div class="method">
+    <strong>Método</strong>
+    <p>Contagem de frequência por <code>track_genre</code> com <code>value_counts()</code>, seguida da seleção dos 20 gêneros com maior número de faixas. O gráfico é uma visualização de frequência, não uma medida de preferência dos usuários.</p>
+  </div>
+  <p class="note">A base cobre muitos gêneros com contagens relativamente equilibradas no topo. Isso é relevante para experimentos de recomendação baseada em conteúdo e para comparações entre gêneros.</p>
   <img src="assets/fig1.png" alt="Top 20 gêneros" width="1000">
 </div>
 
 <div class="card">
   <h2>3. Distribuições das audio features e popularity</h2>
-  <p class="note">Features usadas tipicamente em sistemas de recomendação content-based.</p>
+  <div class="method">
+    <strong>Método</strong>
+    <p>Histogramas com 40 classes (<em>bins</em>) para cada variável numérica selecionada, usando todas as faixas disponíveis após a deduplicação.</p>
+    <p>Foram analisadas <code>danceability</code>, <code>energy</code>, <code>loudness</code>, <code>speechiness</code>, <code>acousticness</code>, <code>instrumentalness</code>, <code>liveness</code>, <code>valence</code>, <code>tempo</code> e <code>popularity</code>.</p>
+    <p>Nem todas usam a mesma escala: várias audio features ficam aproximadamente entre 0 e 1; <code>loudness</code> é expresso em dB, <code>tempo</code> em BPM e <code>popularity</code> varia de 0 a 100.</p>
+  </div>
   <img src="assets/fig2.png" alt="Histogramas" width="1100">
 </div>
 
 <div class="card">
   <h2>4. Correlação entre features</h2>
-  <p class="note">Útil para identificar redundância e relações com popularity.</p>
-  <img src="assets/fig3.png" alt="Heatmap de correlação" width="900">
+  <div class="method">
+    <strong>Método aplicado: correlação de Pearson</strong>
+    <p>O notebook usa <code>df[audio_features].corr()</code>. No pandas, o método padrão de <code>DataFrame.corr()</code> é a correlação de Pearson; portanto, a matriz mede a intensidade e a direção da associação <strong>linear</strong> entre cada par de variáveis.</p>
+    <p>O coeficiente <code>r</code> varia de <strong>-1 a +1</strong>: valores positivos indicam associação linear direta, valores negativos indicam associação inversa e valores próximos de zero indicam pouca associação linear.</p>
+    <ul>
+      <li>Variáveis incluídas: <code>danceability</code>, <code>energy</code>, <code>loudness</code>, <code>speechiness</code>, <code>acousticness</code>, <code>instrumentalness</code>, <code>liveness</code>, <code>valence</code>, <code>tempo</code> e <code>popularity</code>.</li>
+      <li><code>popularity</code> foi incluída apenas para verificar associação descritiva com os atributos; não é uma audio feature nem representa preferência individual.</li>
+      <li><code>key</code>, <code>mode</code> e <code>time_signature</code> não entram na matriz principal. Apesar de aparecerem numericamente na base, tratá-los diretamente como variáveis contínuas pode produzir interpretações inadequadas.</li>
+      <li>Não é necessário normalizar as escalas antes de calcular Pearson: o coeficiente é invariável a mudanças lineares de escala. Assim, o fato de <code>loudness</code> estar em dB e outras features em 0–1 não impede o cálculo.</li>
+    </ul>
+    <p><strong>Limitação:</strong> Pearson detecta principalmente relações lineares e pode ser influenciado por distribuições assimétricas e valores extremos. Como verificação de robustez, uma etapa posterior pode comparar estes resultados com a correlação de Spearman.</p>
+  </div>
+  <img src="assets/fig3.png" alt="Heatmap da matriz de correlação de Pearson" width="900">
 </div>
 
 <div class="card">
   <h2>5. Popularity × energy / valence / danceability</h2>
-  <p class="note">Amostra de 8.000 tracks. Correlações com popularity tendem a ser fracas - esperado em bases amplas.</p>
+  <div class="method">
+    <strong>Método</strong>
+    <p>Gráficos de dispersão usando uma amostra aleatória de 8.000 faixas, obtida com <code>random_state=42</code> para reprodutibilidade. A amostragem é usada apenas para reduzir sobreposição visual; a matriz de correlação da seção anterior usa a base deduplicada completa.</p>
+    <p>Os gráficos servem como inspeção visual da forma da relação e ajudam a verificar se uma associação linear resumida por Pearson parece plausível.</p>
+  </div>
+  <p class="note">As relações com <code>popularity</code> aparentam ser fracas no conjunto amplo. Isso deve ser interpretado como associação descritiva, não como evidência de que uma feature cause maior ou menor popularidade.</p>
   <img src="assets/fig4.jpg" alt="Scatters" width="1100">
 </div>
 
 <div class="card">
   <h2>6. Popularity por gênero (Top 12)</h2>
-  <img src="assets/fig5.png" alt="Boxplots por gênero" width="1000">
+  <div class="method">
+    <strong>Método</strong>
+    <p>São selecionados os 12 gêneros com maior número de faixas. Para cada gênero, a distribuição de <code>popularity</code> é apresentada por boxplot e os gêneros são ordenados pela mediana de popularidade.</p>
+    <p>O boxplot resume mediana, quartis e dispersão; diferenças visuais entre gêneros não constituem, por si só, teste de significância estatística.</p>
+  </div>
+  <img src="assets/fig5.png" alt="Boxplots de popularity por gênero" width="1000">
 </div>
 
 <div class="card">
   <h2>7. Observações para o TCC</h2>
   <ul>
-    <li>A base é adequada para experimentos de <strong>recomendação baseada em conteúdo</strong> (audio features) e análises de similaridade entre tracks/gêneros.</li>
+    <li>A base é adequada para experimentos de <strong>recomendação baseada em conteúdo</strong> com audio features e para análises de similaridade entre tracks/gêneros.</li>
     <li><code>popularity</code> é um score do Spotify (0–100), não um feedback explícito de usuário. Não deve ser tratado como ground-truth de preferência individual.</li>
     <li>Há muitos gêneros; para modelos, pode ser necessário agrupar ou filtrar conforme o recorte do problema.</li>
-    <li>Features como <code>instrumentalness</code> e <code>speechiness</code> são altamente enviesadas (muitos valores próximos de 0) - importante para normalização / escolha de distância.</li>
-    <li>Não há dados de interação usuário–item. Qualquer avaliação de recomendação precisará de estratégia alternativa (ex.: similaridade, hold-out por gênero, ou coleta própria).</li>
+    <li>Features como <code>instrumentalness</code> e <code>speechiness</code> apresentam distribuições fortemente assimétricas. Isso importa na escolha de medidas de distância e também motiva comparar Pearson com métodos baseados em postos, como Spearman.</li>
+    <li>Não há dados de interação usuário–item. Qualquer avaliação de recomendação precisará de estratégia alternativa, como similaridade, hold-out por gênero ou coleta própria.</li>
+    <li>A matriz de correlação é uma análise exploratória entre atributos da faixa; ela não demonstra causalidade e não substitui uma avaliação de um sistema de recomendação.</li>
   </ul>
 </div>
 
