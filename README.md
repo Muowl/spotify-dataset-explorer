@@ -1,54 +1,29 @@
-# Spotify Tracks Dataset — Exploração Visual
+# spotify-dataset-explorer
 
-Visualização exploratória da base [Spotify Tracks Dataset](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset) para o **TCC de Sistemas de Informação (UFJF)**.
+Repo simples para estudar e visualizar a base [Spotify Tracks Dataset](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset).
 
-## Como visualizar (orientador / banca)
+Usado no TCC de Sistemas de Informacao (UFJF) so como apoio para entender a base (gêneros, audio features, popularity etc.).
 
-**Não é necessário instalar nada nem executar código.**
+## Visualizar
 
-Abra o link do GitHub Pages (após ativação):
+O arquivo principal e o HTML em `docs/index.html`.
 
-> **https://muowl.github.io/spotify-dataset-explorer/**
+Depois de ativar o GitHub Pages (Settings > Pages > branch `main`, pasta `/docs`), o link fica:
 
-Se o Pages ainda não estiver ativo, abra o arquivo estático:
+https://muowl.github.io/spotify-dataset-explorer/
 
-- [docs/index.html](docs/index.html) (baixe ou visualize no repositório)
+Nao precisa instalar nada nem rodar codigo.
 
-O HTML já contém todos os gráficos e tabelas pré-renderizados.
+## Estrutura
 
-## O que este repositório contém
+- `docs/index.html` - visualizacao estatica com os graficos
+- `notebooks/01_eda_spotify_tracks.ipynb` - notebook com o codigo da exploracao
+- `data/README.md` - de onde veio a base e quais sao as colunas
 
-| Caminho | Descrição |
-|---------|-----------|
-| `docs/index.html` | **Visualizador principal** — abra no navegador |
-| `notebooks/01_eda_spotify_tracks.ipynb` | Notebook fonte (código da EDA) |
-| `data/README.md` | Origem e descrição da base |
+## Dados
 
-## Fonte dos dados
+A base nao esta versionada aqui (CSV de ~20 MB).
 
-- **Dataset:** Spotify Tracks Dataset (maharshipandya)
-- **Origem:** Spotify Web API
-- **Tamanho aproximado:** ~114.000 tracks, ~114 gêneros
-- **Formato:** CSV
-- **Links:** [Kaggle](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset) · [Hugging Face](https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset)
-
-## Conteúdo da exploração
-
-1. Visão geral (tamanho, gêneros, artistas, explicit)
-2. Distribuição dos top 20 gêneros
-3. Histogramas das audio features + popularity
-4. Matriz de correlação
-5. Scatters popularity × energy / valence / danceability
-6. Boxplots de popularity por gênero
-7. Observações relevantes para o desenho do TCC (recomendações baseadas em conteúdo)
-
-## Ativar GitHub Pages (uma vez)
-
-1. Vá em **Settings → Pages**
-2. Source: **Deploy from a branch**
-3. Branch: `main` · pasta: `/docs`
-4. Salve. Em alguns minutos o link `https://muowl.github.io/spotify-dataset-explorer/` ficará disponível.
-
-## Contexto do TCC
-
-Este material apoia a fase de entendimento da base de dados que será utilizada nos experimentos de recomendação musical (abordagens content-based / features de áudio).
+Links:
+- [Kaggle](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset)
+- [Hugging Face](https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset)
