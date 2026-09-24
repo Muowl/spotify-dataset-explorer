@@ -50,26 +50,26 @@
   <h2>1. Visão geral da base</h2>
   <div class="stats">
     <div class="stat"><strong>89,741</strong><span>tracks (após remover duplicatas de track_id)</span></div>
-    <div class="stat"><strong>113</strong><span>gêneros distintos</span></div>
+    <div class="stat"><strong>114</strong><span>gêneros distintos</span></div>
     <div class="stat"><strong>31,437</strong><span>artistas / combinações de artistas</span></div>
     <div class="stat"><strong>8.6%</strong><span>tracks marcadas como explicit</span></div>
   </div>
   <div class="method">
     <strong>Procedimento de preparação</strong>
-    <p>O CSV original possui 114.000 linhas. A análise remove a coluna de índice exportada (<code>Unnamed: 0</code>, quando presente) e elimina duplicatas com base em <code>track_id</code>, resultando em 89.741 faixas únicas.</p>
+    <p>O CSV original possui 114.000 linhas (1.000 por gênero × 114 gêneros). A análise remove a coluna de índice exportada (<code>Unnamed: 0</code>, quando presente) e aplica dois recortes: para análises globais (features, correlação), elimina duplicatas com base em <code>track_id</code>, resultando em 89.741 faixas únicas; para análises por gênero, deduplica o par <code>(track_id, track_genre)</code>, preservando todos os 114 gêneros.</p>
     <p>As análises abaixo são descritivas e exploratórias: procuram caracterizar a base e identificar relações entre atributos, sem interpretar correlação como causalidade.</p>
   </div>
   <p class="note" style="margin-top:1rem">Fonte: <a href="https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset" target="_blank">Kaggle - Spotify Tracks Dataset</a> (também no Hugging Face). Coletado via Spotify Web API. Linhas originais: 114,000. Duplicatas de <code>track_id</code> removidas: 24,259. Valores faltantes: artists: 1, album_name: 1, track_name: 1.</p>
 </div>
 
 <div class="card">
-  <h2>2. Distribuição de gêneros (Top 20)</h2>
+  <h2>2. Faixas únicas por gênero</h2>
   <div class="method">
     <strong>Método</strong>
-    <p>Contagem de frequência por <code>track_genre</code> com <code>value_counts()</code>, seguida da seleção dos 20 gêneros com maior número de faixas. O gráfico é uma visualização de frequência, não uma medida de preferência dos usuários.</p>
+    <p>Contagem de faixas únicas por <code>track_genre</code> após deduplicar o par <code>(track_id, track_genre)</code>. O gráfico mostra os 20 rótulos com menos IDs distintos, destacando os gêneros com maior sobreposição de faixas.</p>
   </div>
-  <p class="note">A base cobre muitos gêneros com contagens relativamente equilibradas no topo. Isso é relevante para experimentos de recomendação baseada em conteúdo e para comparações entre gêneros.</p>
-  <img src="assets/fig1.png" alt="Top 20 gêneros" width="1000">
+  <p class="note">A base original é estratificada: 1.000 linhas por gênero. Após a deduplicação do par, as contagens ficam entre 904 e 1.000, indicando que a maior parte dos gêneros mantém quase todas as faixas exclusivas.</p>
+  <img src="assets/fig1.png" alt="Faixas únicas por gênero" width="1000">
 </div>
 
 <div class="card">
@@ -112,10 +112,10 @@
 </div>
 
 <div class="card">
-  <h2>6. Popularity por gênero (Top 12)</h2>
+  <h2>6. Popularity por gênero (12 maiores medianas)</h2>
   <div class="method">
     <strong>Método</strong>
-    <p>São selecionados os 12 gêneros com maior número de faixas. Para cada gênero, a distribuição de <code>popularity</code> é apresentada por boxplot e os gêneros são ordenados pela mediana de popularidade.</p>
+    <p>São selecionados os 12 gêneros com maior mediana de <code>popularity</code> a partir do recorte de gêneros únicos (<code>track_id</code>, <code>track_genre</code>). Para cada gênero, a distribuição de <code>popularity</code> é apresentada por boxplot e os gêneros são ordenados pela mediana decrescente.</p>
     <p>O boxplot resume mediana, quartis e dispersão; diferenças visuais entre gêneros não constituem, por si só, teste de significância estatística.</p>
   </div>
   <img src="assets/fig5.png" alt="Boxplots de popularity por gênero" width="1000">
@@ -126,6 +126,7 @@
   <ul>
     <li>A base é adequada para experimentos de <strong>recomendação baseada em conteúdo</strong> com audio features e para análises de similaridade entre tracks/gêneros.</li>
     <li><code>popularity</code> é um score do Spotify (0–100), não um feedback explícito de usuário. Não deve ser tratado como ground-truth de preferência individual.</li>
+    <li>O CSV original possui 1.000 linhas em cada um dos 114 gêneros. Análises por gênero devem deduplicar o par <code>(track_id, track_genre)</code>; deduplicar apenas por <code>track_id</code> atribui a faixa ao primeiro rótulo encontrado no arquivo e apaga gêneros inteiros (como <code>songwriter</code>).</li>
     <li>Há muitos gêneros; para modelos, pode ser necessário agrupar ou filtrar conforme o recorte do problema.</li>
     <li>Features como <code>instrumentalness</code> e <code>speechiness</code> apresentam distribuições fortemente assimétricas. Isso importa na escolha de medidas de distância e também motiva comparar Pearson com métodos baseados em postos, como Spearman.</li>
     <li>Não há dados de interação usuário–item. Qualquer avaliação de recomendação precisará de estratégia alternativa, como similaridade, hold-out por gênero ou coleta própria.</li>
