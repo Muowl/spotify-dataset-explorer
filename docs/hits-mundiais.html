@@ -107,8 +107,8 @@
 
   <section class="card card--niches" aria-labelledby="nichos">
     <span class="section-label">02 · Sucessos de nicho</span>
-    <h2 id="nichos">Quatro gêneros, quatro faixas em destaque</h2>
-    <p>Escolhemos quatro rótulos da base com perfis sonoros distintos: <code>heavy-metal</code>, <code>bluegrass</code>, <code>classical</code> e <code>drum-and-bass</code>.</p>
+    <h2 id="nichos">Cinco gêneros, cinco faixas em destaque</h2>
+    <p>Escolhemos cinco rótulos da base com perfis sonoros distintos: <code>heavy-metal</code>, <code>bluegrass</code>, <code>classical</code>, <code>drum-and-bass</code> e <code>tango</code>.</p>
     <div class="callout"><strong>Critério dos nichos.</strong> Em cada rótulo, selecionamos uma faixa com o maior score <code>popularity</code> registrado no CSV. Em caso de empate, usamos o ID fixado no script. A mediana do respectivo gênero dá contexto ao score da faixa.</div>
     <div class="table-wrap">
       <table>
@@ -147,11 +147,11 @@
   <section class="card" aria-labelledby="discussao">
     <h2 id="discussao">Perguntas para a reunião</h2>
     <ul class="finding-list">
-      <li><strong>Dançabilidade é necessária?</strong> Todos os cinco hits estão acima da mediana da base (0,576). Entre as quatro faixas de nicho, três ficam abaixo da mediana e apenas “Daylight” (bluegrass) fica em 0,582, ligeiramente acima. O contraste, portanto, não é categórico; uma amostra maior e pareada por gênero e época permitiria testar essa diferença com rigor estatístico.</li>
-      <li><strong>Existe um perfil sonoro único entre nichos?</strong> “One Night in Tokyo” tem energia 0,977 e acusticidade próxima de zero; “Experience” tem energia 0,449 e acusticidade 0,934. Essas faixas podem ter bom score no Spotify com perfis bem diferentes.</li>
+      <li><strong>Dançabilidade é necessária?</strong> Todos os cinco hits estão acima da mediana da base (0,576). Entre as cinco faixas de nicho, quatro ficam abaixo da mediana (com o tango “Por Una Cabeza” em 0,387) e apenas “Daylight” (bluegrass) fica em 0,582, ligeiramente acima. O contraste, portanto, não é categórico; uma amostra maior e pareada por gênero e época permitiria testar essa diferença com rigor estatístico.</li>
+      <li><strong>Existe um perfil sonoro único entre nichos?</strong> “One Night in Tokyo” tem energia 0,977 e acusticidade próxima de zero; “Experience” tem energia 0,449 e acusticidade 0,934; “Por Una Cabeza” tem andamento de 62 BPM e energia de 0,258. Essas faixas alcançam destaque em suas comunidades com perfis sonoros diametralmente opostos.</li>
       <li><strong>Como definir sucesso no TCC?</strong> Visualizações de clipe, score de popularidade e posição em parada são medidas distintas. Uma próxima etapa seria obter uma fonte externa comum aos dois grupos e comparar faixas do mesmo período.</li>
     </ul>
-    <p class="small">Os grupos foram construídos por critérios diferentes e têm apenas cinco e quatro gravações. As diferenças observadas são descritivas; não representam todos os gêneros nem permitem atribuir sucesso às características de áudio.</p>
+    <p class="small">Os grupos foram construídos por critérios diferentes e têm cinco gravações em cada grupo (n=5). As diferenças observadas são descritivas; não representam todos os gêneros nem permitem atribuir sucesso às características de áudio.</p>
   </section>
 
   <section class="card" aria-labelledby="metodo">
@@ -159,7 +159,7 @@
     <ol>
       <li>Baixe o <a href="https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset/blob/main/dataset.csv">dataset.csv</a> e coloque em <code>data/dataset.csv</code>.</li>
       <li>Execute <code>python scripts/build_global_hits.py</code> na raiz do repositório. O script recria os valores desta página em <code>docs/assets/hits-data.js</code>.</li>
-      <li>Confira os nove <code>track_id</code> fixados no script. Eles identificam as gravações analisadas, independentemente de nomes repetidos.</li>
+      <li>Confira os dez <code>track_id</code> fixados no script. Eles identificam as gravações analisadas, independentemente de nomes repetidos.</li>
     </ol>
     <p class="small">As medianas da base são calculadas após manter a primeira ocorrência de cada <code>track_id</code>, seguindo o procedimento da página geral. Para as medianas por gênero, cada <code>track_id</code> é contado uma vez dentro do respectivo rótulo. A seleção dos hits usa a ordem da lista do YouTube em 2022. A correspondência entre clipe e gravação foi feita por título e artista; o CSV não contém o ID dos vídeos.</p>
   </section>

@@ -30,6 +30,7 @@ NICHES = [
     ("bluegrass", "Bluegrass", "11TmWrHkxwtVcCtEdAXjJA"),
     ("classical", "Clássica", "1BncfTJAWxrsxyT9culBrj"),
     ("drum-and-bass", "Drum and bass", "6LW3Z1GqbL78TIjfDyg4zp"),
+    ("tango", "Tango", "1jSiCrX3a7ie9Okck6lL1R"),
 ]
 FEATURES = (
     "danceability", "energy", "valence", "tempo", "acousticness",
