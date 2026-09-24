@@ -9,9 +9,9 @@
   * { box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
          margin: 0; background: var(--bg); color: var(--text); line-height: 1.55; }
-  header { background: #191414; color: #fff; padding: 1.8rem 1.5rem; }
-  header h1 { margin: 0 0 0.3rem; font-size: 1.6rem; }
-  header p { margin: 0; opacity: 0.85; font-size: 0.95rem; }
+  header { background: #191414; color: #fff; padding: 1.8rem max(1.5rem, calc((100% - 1100px) / 2)); }
+  header h1 { margin: 0 0 0.3rem; font-size: 1.7rem; }
+  header p { margin: 0; color: #ddd; }
   nav { background: #252525; padding: 0.7rem max(1.5rem, calc((100% - 1100px) / 2)); display: flex; gap: 0.65rem; flex-wrap: wrap; }
   nav a { color: #fff; text-decoration: none; padding: 0.45rem 0.8rem; border-radius: 6px; }
   nav a:hover, nav a:focus-visible, nav a[aria-current="page"] { background: #1DB954; color: #111; }
