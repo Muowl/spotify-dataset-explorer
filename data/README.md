@@ -9,6 +9,8 @@ A base **não** está versionada neste repositório (arquivo ~20 MB).
 
 Arquivo principal: `dataset.csv`
 
+Após baixar, execute `python scripts/build_global_hits.py` a partir da raiz do repositório para recriar `docs/assets/hits-data.js`. O CSV é ignorado pelo Git; o arquivo JavaScript gerado é versionado para o GitHub Pages funcionar sem processamento no servidor.
+
 ## Colunas principais
 
 - `track_id`, `artists`, `album_name`, `track_name`

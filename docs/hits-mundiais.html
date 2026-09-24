@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hits mundiais — Spotify Tracks Dataset</title>
+<style>
+  :root { --green:#1db954; --ink:#191414; --muted:#535353; --bg:#f7f7f7; --line:#ddd; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; }
+  header { background:var(--ink); color:white; padding:1.8rem max(1.5rem,calc((100% - 1100px)/2)); }
+  header h1 { margin:0 0 .3rem; font-size:1.7rem; }
+  header p { margin:0; color:#ddd; }
+  nav { background:#252525; padding:.7rem max(1.5rem,calc((100% - 1100px)/2)); display:flex; gap:.65rem; flex-wrap:wrap; }
+  nav a { color:white; text-decoration:none; padding:.45rem .8rem; border-radius:6px; }
+  nav a:hover, nav a:focus-visible, nav a[aria-current="page"] { background:var(--green); color:#111; }
+  main { max-width:1100px; margin:auto; padding:1.5rem; }
+  .card { background:white; border-radius:10px; padding:1.25rem 1.4rem; margin-bottom:1.4rem; box-shadow:0 1px 3px #0001; }
+  h2 { margin:0 0 .8rem; font-size:1.25rem; }
+  h3 { font-size:1.05rem; margin:1.2rem 0 .4rem; }
+  p { margin:.55rem 0; }
+  a { color:#087b35; }
+  a:focus-visible, select:focus-visible { outline:3px solid #1454a1; outline-offset:2px; }
+  .lead { font-size:1.08rem; max-width:75ch; }
+  .summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(185px,1fr)); gap:.8rem; margin:1rem 0; }
+  .summary div { background:#eff9f2; border-left:4px solid var(--green); padding:.8rem 1rem; border-radius:5px; }
+  .summary strong { display:block; font-size:1.45rem; }
+  .summary span,.small { color:var(--muted); font-size:.9rem; }
+  .callout { border-left:4px solid var(--ink); background:#f3f5f4; padding:.8rem 1rem; margin:1rem 0; }
+  .table-wrap { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; min-width:730px; font-size:.93rem; }
+  th,td { padding:.65rem .55rem; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap; }
+  th:first-child,td:first-child { text-align:left; }
+  thead th { background:#eff9f2; }
+  tbody tr:nth-child(even) { background:#fafafa; }
+  .song { font-weight:600; }
+  .song small { display:block; color:var(--muted); font-weight:400; }
+  .metric-control { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; margin:1rem 0; }
+  select { font:inherit; border:1px solid #777; border-radius:5px; padding:.4rem .6rem; background:white; }
+  .plot { display:grid; gap:.7rem; }
+  .bar-row { display:grid; grid-template-columns:minmax(115px,190px) 1fr 58px; align-items:center; gap:.55rem; font-size:.92rem; }
+  .bar-track { background:#e9e9e9; height:18px; border-radius:4px; overflow:hidden; }
+  .bar { background:#159447; height:100%; border-radius:4px; }
+  .bar-row.baseline { border-top:1px solid var(--line); padding-top:.8rem; margin-top:.2rem; }
+  .bar-row.baseline .bar { background:#424242; }
+  .bar-row strong { text-align:right; font-variant-numeric:tabular-nums; }
+  .finding-list { padding-left:1.3rem; }
+  .finding-list li { margin:.6rem 0; }
+  footer { text-align:center; color:var(--muted); font-size:.85rem; padding:1.5rem; }
+  @media (max-width:600px) { .bar-row { grid-template-columns:100px 1fr 43px; font-size:.78rem; } main { padding:1rem; } .card { padding:1rem; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>O que cinco hits mundiais têm em comum?</h1>
+  <p>Um recorte exploratório para conversar sobre o TCC, com características musicais da base Spotify.</p>
+</header>
+<nav aria-label="Navegação principal">
+  <a href="index.html">Visão geral da base</a>
+  <a href="hits-mundiais.html" aria-current="page">Hits mundiais</a>
+</nav>
+<main>
+  <section class="card" aria-labelledby="recorte">
+    <h2 id="recorte">Recorte da análise</h2>
+    <p class="lead">Selecionamos os cinco clipes musicais mais vistos na <a href="https://blog.youtube/creator-and-artist-stories/10-years-of-youtubes-billion-views-club-psy-gangnam-style/">lista retrospectiva publicada pelo YouTube em 2022</a>: “Despacito”, “Shape of You”, “See You Again”, “Uptown Funk” e “Gangnam Style”. Para cada um, localizamos uma gravação na <a href="https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset">Spotify Tracks Dataset</a> pelo identificador da faixa.</p>
+    <div class="summary">
+      <div><strong>5</strong><span>gravações analisadas</span></div>
+      <div><strong id="corpus-count">—</strong><span>faixas únicas na base de comparação</span></div>
+      <div><strong>2022</strong><span>ano da lista de clipes usada na seleção</span></div>
+    </div>
+    <div class="callout"><strong>Critério de sucesso.</strong> Visualizações de clipes no YouTube servem apenas para escolher os casos. As medidas abaixo descrevem as gravações no Spotify; não explicam por que os clipes fizeram sucesso. O ranking de 2022 não é apresentado como ranking atual.</div>
+  </section>
+
+  <section class="card" aria-labelledby="perfil">
+    <h2 id="perfil">Perfil das gravações</h2>
+    <p>As medidas entre 0 e 1 são escores de áudio. <strong>Dançabilidade</strong> descreve a adequação do ritmo à dança; <strong>energia</strong>, a intensidade percebida; <strong>valência</strong>, a positividade sonora; <strong>acusticidade</strong>, a probabilidade de caráter acústico. <strong>Tempo</strong> está em BPM.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Gravação</th><th scope="col">Dançabilidade</th><th scope="col">Energia</th><th scope="col">Valência</th><th scope="col">Acusticidade</th><th scope="col">Tempo (BPM)</th></tr></thead>
+        <tbody id="tracks-table"></tbody>
+        <tfoot id="medians-table"></tfoot>
+      </table>
+    </div>
+    <p class="small">Fonte dos valores: CSV original da Spotify Tracks Dataset, após remover duplicatas de <code>track_id</code>. Cada linha acima usa um ID específico, evitando covers e remixes. Clique no título para abrir a faixa no Spotify.</p>
+  </section>
+
+  <section class="card" aria-labelledby="comparacao">
+    <h2 id="comparacao">Compare uma característica</h2>
+    <p>As barras mostram os cinco casos e, em cinza, a mediana de todas as faixas únicas da base. A mediana resume o conjunto; não é uma faixa típica de qualquer gênero específico.</p>
+    <div class="metric-control">
+      <label for="feature">Característica:</label>
+      <select id="feature">
+        <option value="danceability">Dançabilidade</option>
+        <option value="energy">Energia</option>
+        <option value="valence">Valência</option>
+        <option value="acousticness">Acusticidade</option>
+      </select>
+    </div>
+    <div id="plot" class="plot" role="img" aria-label="Comparação da característica selecionada"></div>
+    <p id="plot-caption" class="small"></p>
+  </section>
+
+  <section class="card" aria-labelledby="achados">
+    <h2 id="achados">O que aparece neste recorte?</h2>
+    <ul class="finding-list">
+      <li>As cinco gravações têm dançabilidade acima da mediana da base (<strong>0,576</strong>). A mediana entre os cinco casos é <strong>0,727</strong>.</li>
+      <li>A valência varia bastante: de <strong>0,283</strong> em “See You Again” a <strong>0,931</strong> em “Shape of You”. Logo, positividade sonora alta não é uma característica compartilhada por todos.</li>
+      <li>A energia também varia (<strong>0,481–0,937</strong>), assim como o tempo (<strong>80–178 BPM</strong>, arredondado). Não surge um único perfil de intensidade ou andamento.</li>
+      <li>Quatro gravações têm instrumentalidade próxima de zero; “Uptown Funk” tem o maior valor do grupo, ainda muito baixo (<strong>0,000082</strong>). Essa medida sugere predomínio de conteúdo vocal, mas não mede letra, idioma ou estrutura musical.</li>
+    </ul>
+    <div class="callout"><strong>Para discutir com o orientador.</strong> Este recorte gera hipóteses, como verificar se hits selecionados por um critério externo tendem a ter maior dançabilidade do que faixas semelhantes por gênero e época. Cinco casos escolhidos por visualizações não permitem inferir uma regra geral nem testar causalidade. A base também não traz posição em parada, visualizações, país de sucesso ou data da gravação.</div>
+  </section>
+
+  <section class="card" aria-labelledby="metodo">
+    <h2 id="metodo">Como reproduzir</h2>
+    <ol>
+      <li>Baixe o <a href="https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset/blob/main/dataset.csv">dataset.csv</a> e coloque em <code>data/dataset.csv</code>.</li>
+      <li>Execute <code>python scripts/build_global_hits.py</code> na raiz do repositório. O script recria os valores desta página em <code>docs/assets/hits-data.js</code>.</li>
+      <li>Confira os cinco <code>track_id</code> fixados no script. Eles identificam as gravações analisadas, independentemente de nomes repetidos.</li>
+    </ol>
+    <p class="small">As medianas da base são calculadas após manter a primeira ocorrência de cada <code>track_id</code>, seguindo o procedimento da página geral. A seleção dos casos usa a ordem da lista do YouTube em 2022. A correspondência entre clipe e gravação foi feita por título e artista; o CSV não contém o ID dos vídeos.</p>
+  </section>
+</main>
+<footer>Projeto acadêmico de exploração da base · <a href="https://github.com/Muowl/spotify-dataset-explorer">Repositório no GitHub</a></footer>
+<script src="assets/hits-data.js"></script>
+<script>
+(() => {
+  const data = window.HITS_DATA;
+  if (!data) return;
+  const fmt = value => Number(value).toFixed(3).replace('.', ',');
+  document.getElementById('corpus-count').textContent = data.unique_tracks.toLocaleString('pt-BR');
+  const tbody = document.getElementById('tracks-table');
+  const fields = ['danceability', 'energy', 'valence', 'acousticness', 'tempo'];
+  function cell(row, value) {
+    const td = document.createElement('td');
+    td.textContent = value;
+    row.appendChild(td);
+  }
+  data.hits.forEach(hit => {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.className = 'song';
+    const a = document.createElement('a');
+    a.href = 'https://open.spotify.com/track/' + encodeURIComponent(hit.track_id);
+    a.textContent = hit.title;
+    td.appendChild(a);
+    const artist = document.createElement('small');
+    artist.textContent = hit.artist;
+    td.appendChild(artist);
+    tr.appendChild(td);
+    fields.forEach(field => cell(tr, field === 'tempo' ? Math.round(hit.features[field]).toLocaleString('pt-BR') : fmt(hit.features[field])));
+    tbody.appendChild(tr);
+  });
+  const foot = document.getElementById('medians-table');
+  [['Mediana dos 5 hits', data.hits_median], ['Mediana da base', data.corpus_median]].forEach(([label, metrics]) => {
+    const tr = document.createElement('tr');
+    const th = document.createElement('th');
+    th.scope = 'row'; th.textContent = label; tr.appendChild(th);
+    fields.forEach(field => cell(tr, field === 'tempo' ? Math.round(metrics[field]).toLocaleString('pt-BR') : fmt(metrics[field])));
+    foot.appendChild(tr);
+  });
+  const feature = document.getElementById('feature');
+  const plot = document.getElementById('plot');
+  function draw() {
+    const key = feature.value;
+    plot.replaceChildren();
+    const rows = data.hits.map(hit => [hit.title, hit.features[key], false]);
+    rows.push(['Mediana da base', data.corpus_median[key], true]);
+    rows.forEach(([name, value, baseline]) => {
+      const row = document.createElement('div'); row.className = 'bar-row' + (baseline ? ' baseline' : '');
+      const label = document.createElement('span'); label.textContent = name;
+      const track = document.createElement('div'); track.className = 'bar-track';
+      const bar = document.createElement('div'); bar.className = 'bar'; bar.style.width = (value * 100) + '%';
+      track.appendChild(bar);
+      const number = document.createElement('strong'); number.textContent = fmt(value);
+      row.append(label, track, number); plot.appendChild(row);
+    });
+    const name = feature.options[feature.selectedIndex].text;
+    plot.setAttribute('aria-label', name + ': ' + rows.map(([title, value]) => title + ' ' + fmt(value)).join('; '));
+    document.getElementById('plot-caption').textContent = name + ' em escala de 0 a 1. A barra cinza representa a mediana das ' + data.unique_tracks.toLocaleString('pt-BR') + ' faixas únicas.';
+  }
+  feature.addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

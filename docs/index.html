@@ -12,6 +12,9 @@
   header { background: #191414; color: #fff; padding: 1.8rem 1.5rem; }
   header h1 { margin: 0 0 0.3rem; font-size: 1.6rem; }
   header p { margin: 0; opacity: 0.85; font-size: 0.95rem; }
+  nav { background: #252525; padding: 0.7rem max(1.5rem, calc((100% - 1100px) / 2)); display: flex; gap: 0.65rem; flex-wrap: wrap; }
+  nav a { color: #fff; text-decoration: none; padding: 0.45rem 0.8rem; border-radius: 6px; }
+  nav a:hover, nav a:focus-visible, nav a[aria-current="page"] { background: #1DB954; color: #111; }
   main { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
   .card { background: var(--card); border-radius: 10px; padding: 1.25rem 1.4rem; margin-bottom: 1.4rem;
            box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
@@ -37,6 +40,10 @@
   <h1>Spotify Tracks Dataset - Exploração Visual</h1>
   <p>Apoio para estudar a base usada no TCC (UFJF). Visualização estática, sem precisar executar nada.</p>
 </header>
+<nav aria-label="Navegação principal">
+  <a href="index.html" aria-current="page">Visão geral da base</a>
+  <a href="hits-mundiais.html">Hits mundiais</a>
+</nav>
 <main>
 
 <div class="card">
