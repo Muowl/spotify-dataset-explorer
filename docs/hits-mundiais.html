@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hits mundiais e nichos — Spotify Tracks Dataset</title>
 <style>
-  :root { --green:#1db954; --ink:#191414; --muted:#535353; --bg:#f7f7f7; --line:#ddd; }
+  :root { --green:#1db954; --purple:#8150ab; --ink:#191414; --muted:#535353; --bg:#f7f7f7; --line:#ddd; }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; }
   header { background:var(--ink); color:white; padding:1.8rem max(1.5rem,calc((100% - 1100px)/2)); }
@@ -16,6 +16,12 @@
   nav a:hover, nav a:focus-visible, nav a[aria-current="page"] { background:var(--green); color:#111; }
   main { max-width:1100px; margin:auto; padding:1.5rem; }
   .card { background:white; border-radius:10px; padding:1.25rem 1.4rem; margin-bottom:1.4rem; box-shadow:0 1px 3px #0001; }
+  .card--hits { border-top:5px solid var(--green); }
+  .card--niches { border-top:5px solid var(--purple); }
+  .card--compare { border-top:5px solid var(--ink); }
+  .section-label { display:inline-block; margin:0 0 .55rem; padding:.2rem .6rem; border-radius:4px; background:#e9f7ee; color:#08682e; font-size:.78rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+  .card--niches .section-label { background:#f3ecf8; color:#603482; }
+  .card--compare .section-label { background:#eee; color:#333; }
   h2 { margin:0 0 .8rem; font-size:1.25rem; }
   h3 { font-size:1.05rem; margin:1.2rem 0 .4rem; }
   p { margin:.55rem 0; }
@@ -27,21 +33,30 @@
   .summary strong { display:block; font-size:1.45rem; }
   .summary span,.small { color:var(--muted); font-size:.9rem; }
   .callout { border-left:4px solid var(--ink); background:#f3f5f4; padding:.8rem 1rem; margin:1rem 0; }
+  .card--hits .callout { border-color:var(--green); background:#f2faf5; }
+  .card--niches .callout { border-color:var(--purple); background:#f7f2fa; }
   .table-wrap { overflow-x:auto; }
   table { border-collapse:collapse; width:100%; min-width:730px; font-size:.93rem; }
   th,td { padding:.65rem .55rem; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap; }
   th:first-child,td:first-child { text-align:left; }
   thead th { background:#eff9f2; }
+  .card--niches thead th { background:#f3ecf8; }
+  .card--niches a { color:#69418b; }
   tbody tr:nth-child(even) { background:#fafafa; }
   .song { font-weight:600; }
   .song small { display:block; color:var(--muted); font-weight:400; }
   .metric-control { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; margin:1rem 0; }
+  .legend { display:flex; flex-wrap:wrap; gap:.55rem 1.2rem; margin:.8rem 0 1rem; font-size:.9rem; }
+  .legend span { display:inline-flex; align-items:center; gap:.4rem; }
+  .legend i { display:inline-block; width:.9rem; height:.9rem; border-radius:3px; background:var(--green); }
+  .legend .niche-key { background:var(--purple); }
+  .legend .base-key { background:#424242; }
   select { font:inherit; border:1px solid #777; border-radius:5px; padding:.4rem .6rem; background:white; }
   .plot { display:grid; gap:.7rem; }
   .bar-row { display:grid; grid-template-columns:minmax(115px,190px) 1fr 58px; align-items:center; gap:.55rem; font-size:.92rem; }
   .bar-track { background:#e9e9e9; height:18px; border-radius:4px; overflow:hidden; }
   .bar { background:#159447; height:100%; border-radius:4px; }
-  .bar-row.niche .bar { background:#8150ab; }
+  .bar-row.niche .bar { background:var(--purple); }
   .bar-row.baseline { border-top:1px solid var(--line); padding-top:.8rem; margin-top:.2rem; }
   .bar-row.baseline .bar { background:#424242; }
   .bar-row strong { text-align:right; font-variant-numeric:tabular-nums; }
@@ -61,20 +76,17 @@
   <a href="hits-mundiais.html" aria-current="page">Hits e nichos</a>
 </nav>
 <main>
-  <section class="card" aria-labelledby="recorte">
-    <h2 id="recorte">Como foram escolhidas as músicas?</h2>
+  <section class="card card--hits" aria-labelledby="hits">
+    <span class="section-label">01 · Hits mundiais</span>
+    <h2 id="hits">Cinco clipes que alcançaram o mundo</h2>
     <p class="lead">Selecionamos os cinco clipes musicais mais vistos na <a href="https://blog.youtube/creator-and-artist-stories/10-years-of-youtubes-billion-views-club-psy-gangnam-style/">lista retrospectiva publicada pelo YouTube em 2022</a>: “Despacito”, “Shape of You”, “See You Again”, “Uptown Funk” e “Gangnam Style”. Para cada um, localizamos uma gravação na <a href="https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset">Spotify Tracks Dataset</a> pelo identificador da faixa.</p>
     <div class="summary">
       <div><strong>5</strong><span>hits mundiais analisados</span></div>
-      <div><strong>4</strong><span>faixas de gêneros específicos</span></div>
       <div><strong id="corpus-count">—</strong><span>faixas únicas na base de comparação</span></div>
       <div><strong>2022</strong><span>ano da lista de clipes usada na seleção</span></div>
     </div>
-    <div class="callout"><strong>Dois critérios de seleção.</strong> Os hits foram escolhidos pelas visualizações dos clipes no YouTube. Mais abaixo, quatro faixas de nicho foram escolhidas pelo score <code>popularity</code> do Spotify dentro de rótulos de gênero específicos. São critérios diferentes; a comparação serve para levantar perguntas, não para explicar sucesso nem para representar todos os hits ou nichos. O ranking de 2022 não é apresentado como ranking atual.</div>
-  </section>
-
-  <section class="card" aria-labelledby="perfil">
-    <h2 id="perfil">Perfil das gravações</h2>
+    <div class="callout"><strong>Critério dos hits.</strong> A seleção usa visualizações de clipes no YouTube, conforme o ranking publicado em 2022. As medidas de áudio abaixo descrevem as gravações correspondentes no Spotify. O ranking não é atual e as características não explicam por que os clipes fizeram sucesso.</div>
+    <h3>Características das gravações</h3>
     <p>As medidas entre 0 e 1 são escores de áudio. <strong>Dançabilidade</strong> descreve a adequação do ritmo à dança; <strong>energia</strong>, a intensidade percebida; <strong>valência</strong>, a positividade sonora; <strong>acusticidade</strong>, a probabilidade de caráter acústico. <strong>Tempo</strong> está em BPM.</p>
     <div class="table-wrap">
       <table>
@@ -84,11 +96,20 @@
       </table>
     </div>
     <p class="small">Fonte dos valores: CSV original da Spotify Tracks Dataset, após remover duplicatas de <code>track_id</code>. Cada linha acima usa um ID específico, evitando covers e remixes. Clique no título para abrir a faixa no Spotify.</p>
+    <h3>O que aparece nos cinco hits?</h3>
+    <ul class="finding-list">
+      <li>As cinco gravações têm dançabilidade acima da mediana da base (<strong>0,576</strong>). A mediana entre os cinco casos é <strong>0,727</strong>.</li>
+      <li>A valência varia bastante: de <strong>0,283</strong> em “See You Again” a <strong>0,931</strong> em “Shape of You”. Logo, positividade sonora alta não é uma característica compartilhada por todos.</li>
+      <li>A energia também varia (<strong>0,481–0,937</strong>), assim como o tempo (<strong>80–178 BPM</strong>, arredondado). Não surge um único perfil de intensidade ou andamento.</li>
+      <li>Quatro gravações têm instrumentalidade próxima de zero; “Uptown Funk” tem o maior valor do grupo, ainda muito baixo (<strong>0,000082</strong>). Essa medida sugere predomínio de conteúdo vocal, mas não mede letra, idioma ou estrutura musical.</li>
+    </ul>
   </section>
 
-  <section class="card" aria-labelledby="nichos">
-    <h2 id="nichos">Quatro faixas populares em gêneros específicos</h2>
-    <p>Escolhemos quatro rótulos da base com perfis sonoros distintos: <code>heavy-metal</code>, <code>bluegrass</code>, <code>classical</code> e <code>drum-and-bass</code>. Em cada rótulo, selecionamos uma faixa com o maior <code>popularity</code> registrado no CSV. Em caso de empate, o script usa o ID fixado. A mediana do gênero dá contexto ao score da faixa.</p>
+  <section class="card card--niches" aria-labelledby="nichos">
+    <span class="section-label">02 · Sucessos de nicho</span>
+    <h2 id="nichos">Quatro gêneros, quatro faixas em destaque</h2>
+    <p>Escolhemos quatro rótulos da base com perfis sonoros distintos: <code>heavy-metal</code>, <code>bluegrass</code>, <code>classical</code> e <code>drum-and-bass</code>.</p>
+    <div class="callout"><strong>Critério dos nichos.</strong> Em cada rótulo, selecionamos uma faixa com o maior score <code>popularity</code> registrado no CSV. Em caso de empate, usamos o ID fixado no script. A mediana do respectivo gênero dá contexto ao score da faixa.</div>
     <div class="table-wrap">
       <table>
         <thead><tr><th scope="col">Gravação e rótulo da base</th><th scope="col">Popularity</th><th scope="col">Mediana do gênero</th><th scope="col">Dançabilidade</th><th scope="col">Energia</th><th scope="col">Valência</th><th scope="col">Acusticidade</th></tr></thead>
@@ -98,17 +119,18 @@
     <p class="small">O score <code>popularity</code> varia de 0 a 100 e reflete o desempenho no Spotify no momento em que a base foi coletada; não é uma contagem de fãs do gênero nem uma medida atual. Os rótulos de gênero vêm da base e podem incluir classificações discutíveis. Número de faixas únicas por rótulo, na ordem da tabela: <span id="niche-count">—</span>.</p>
   </section>
 
-  <section class="card" aria-labelledby="comparacao">
-    <h2 id="comparacao">Compare uma característica</h2>
-    <p>As barras mostram os cinco casos e, em cinza, a mediana de todas as faixas únicas da base. A mediana resume o conjunto; não é uma faixa típica de qualquer gênero específico.</p>
+  <section class="card card--compare" aria-labelledby="comparacao">
+    <span class="section-label">03 · Comparação</span>
+    <h2 id="comparacao">Explore os dois grupos</h2>
+    <p>Escolha quais músicas mostrar e qual característica comparar. As barras verdes representam hits mundiais; as roxas, faixas de nicho. A barra cinza mostra a mediana de todas as faixas únicas da base.</p>
     <div class="metric-control">
-      <label for="group">Mostrar:</label>
+      <label for="group">Grupo:</label>
       <select id="group">
         <option value="both">Os dois grupos</option>
         <option value="hits">Só hits mundiais</option>
         <option value="niches">Só faixas de nicho</option>
       </select>
-      <label for="feature">Característica:</label>
+      <label for="feature">Característica musical:</label>
       <select id="feature">
         <option value="danceability">Dançabilidade</option>
         <option value="energy">Energia</option>
@@ -116,19 +138,10 @@
         <option value="acousticness">Acusticidade</option>
       </select>
     </div>
+    <div class="legend" aria-hidden="true"><span><i></i> Hits mundiais</span><span><i class="niche-key"></i> Sucessos de nicho</span><span><i class="base-key"></i> Mediana da base</span></div>
     <div id="plot" class="plot" role="img" aria-label="Comparação da característica selecionada"></div>
     <p id="plot-caption" class="small"></p>
-  </section>
-
-  <section class="card" aria-labelledby="achados">
-    <h2 id="achados">O que aparece nos cinco hits?</h2>
-    <ul class="finding-list">
-      <li>As cinco gravações têm dançabilidade acima da mediana da base (<strong>0,576</strong>). A mediana entre os cinco casos é <strong>0,727</strong>.</li>
-      <li>A valência varia bastante: de <strong>0,283</strong> em “See You Again” a <strong>0,931</strong> em “Shape of You”. Logo, positividade sonora alta não é uma característica compartilhada por todos.</li>
-      <li>A energia também varia (<strong>0,481–0,937</strong>), assim como o tempo (<strong>80–178 BPM</strong>, arredondado). Não surge um único perfil de intensidade ou andamento.</li>
-      <li>Quatro gravações têm instrumentalidade próxima de zero; “Uptown Funk” tem o maior valor do grupo, ainda muito baixo (<strong>0,000082</strong>). Essa medida sugere predomínio de conteúdo vocal, mas não mede letra, idioma ou estrutura musical.</li>
-    </ul>
-    <div class="callout"><strong>Para discutir com o orientador.</strong> Este recorte gera hipóteses, como verificar se hits selecionados por um critério externo tendem a ter maior dançabilidade do que faixas semelhantes por gênero e época. Cinco casos escolhidos por visualizações não permitem inferir uma regra geral nem testar causalidade. A base também não traz posição em parada, visualizações, país de sucesso ou data da gravação.</div>
+    <div class="callout"><strong>Como ler a comparação.</strong> Os grupos foram selecionados por medidas diferentes: visualizações de clipes no YouTube e score de popularidade no Spotify. A mediana da base oferece uma referência geral, não um controle por gênero ou época. Use as diferenças como perguntas para investigar, não como prova de uma regra.</div>
   </section>
 
   <section class="card" aria-labelledby="discussao">
