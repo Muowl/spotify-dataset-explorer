@@ -33,6 +33,19 @@
   a { color: var(--spotify); }
   .note { font-size: 0.9rem; color: var(--muted); }
   code { background: #efefef; padding: 0.08rem 0.28rem; border-radius: 4px; }
+
+  .field-guide { border-top: 4px solid #8150ab; }
+  .field-guide h2 { border-color: #8150ab; }
+  .field-guide p { margin: 0.5rem 0; }
+  .field-guide a { color: #603482; }
+  .field-guide code { overflow-wrap: anywhere; }
+  .field-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 0.65rem 1.2rem; margin: 1rem 0; }
+  .field-list div { border-bottom: 1px solid #e8e3ec; padding-bottom: 0.55rem; }
+  .field-list dt { font-weight: 600; }
+  .field-list dd { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .popularity-note { background: #f7f2fa; border-left: 4px solid #8150ab; border-radius: 6px; padding: 0.85rem 1rem; }
+  .popularity-note h3 { margin: 0 0 0.4rem; color: #603482; }
+  a:focus-visible { outline: 3px solid #603482; outline-offset: 3px; }
 </style>
 </head>
 <body>
@@ -46,6 +59,29 @@
   <a href="emotify.html">Música e emoção</a>
 </nav>
 <main>
+
+<section class="card field-guide" aria-labelledby="campos">
+  <h2 id="campos">Como ler os campos</h2>
+  <p><code>track_id</code> identifica a faixa; <code>track_name</code>, <code>artists</code> e <code>album_name</code> indicam título, artistas e álbum. <code>track_genre</code> é o rótulo de gênero atribuído na base.</p>
+  <dl class="field-list">
+    <div><dt><code>danceability</code> · 0–1</dt><dd>Adequação do ritmo à dança.</dd></div>
+    <div><dt><code>energy</code> · 0–1</dt><dd>Intensidade e atividade percebidas.</dd></div>
+    <div><dt><code>valence</code> · 0–1</dt><dd>Positividade sonora; não mede a emoção do ouvinte.</dd></div>
+    <div><dt><code>acousticness</code> · 0–1</dt><dd>Confiança de que a faixa seja acústica.</dd></div>
+    <div><dt><code>instrumentalness</code> · 0–1</dt><dd>Estimativa de ausência de vocais.</dd></div>
+    <div><dt><code>speechiness</code> · 0–1</dt><dd>Presença de fala na gravação.</dd></div>
+    <div><dt><code>liveness</code> · 0–1</dt><dd>Indícios de público na gravação; valores altos sugerem execução ao vivo.</dd></div>
+    <div><dt><code>loudness</code> · dB</dt><dd>Nível sonoro médio da faixa.</dd></div>
+    <div><dt><code>tempo</code> · BPM</dt><dd>Andamento estimado, em batidas por minuto.</dd></div>
+  </dl>
+  <p class="note">Outros campos: <code>duration_ms</code> é a duração em milissegundos; <code>explicit</code> sinaliza conteúdo explícito; <code>key</code> indica a classe de altura da tonalidade; <code>mode</code>, o modo maior ou menor; <code>time_signature</code>, a estimativa de batidas por compasso.</p>
+  <aside class="popularity-note" aria-labelledby="popularity-title">
+    <h3 id="popularity-title"><code>popularity</code> · índice de 0 a 100</h3>
+    <p>Calculado pelo Spotify principalmente a partir do total de reproduções e de quão recentes elas são. Não é uma contagem de plays ou curtidas, nem uma porcentagem; a fórmula completa não é divulgada.</p>
+    <p><strong>No CSV, o valor é um registro histórico da época da coleta.</strong> Ele não se atualiza e não indica a popularidade atual da faixa. A base também não acompanha sua evolução ao longo do tempo.</p>
+    <p class="note">Definição: <a href="https://developer.spotify.com/documentation/web-api/reference/get-track">documentação oficial do Spotify — campo popularity</a>.</p>
+  </aside>
+</section>
 
 <div class="card">
   <h2>1. Visão geral da base</h2>
