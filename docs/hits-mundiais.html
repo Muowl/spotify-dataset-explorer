@@ -3,251 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hits mundiais e nichos — Spotify Tracks Dataset</title>
+<title>Músicas populares e características sonoras — Spotify Tracks Dataset</title>
 <style>
-  :root { --green:#1db954; --purple:#8150ab; --ink:#191414; --muted:#535353; --bg:#f7f7f7; --line:#ddd; }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; }
-  header { background:var(--ink); color:white; padding:1.8rem max(1.5rem,calc((100% - 1100px)/2)); }
-  header h1 { margin:0 0 .3rem; font-size:1.7rem; }
-  header p { margin:0; color:#ddd; }
-  nav { background:#252525; padding:.7rem max(1.5rem,calc((100% - 1100px)/2)); display:flex; gap:.65rem; flex-wrap:wrap; }
-  nav a { color:white; text-decoration:none; padding:.45rem .8rem; border-radius:6px; }
-  nav a:hover, nav a:focus-visible, nav a[aria-current="page"] { background:var(--green); color:#111; }
-  main { max-width:1100px; margin:auto; padding:1.5rem; }
-  .card { background:white; border-radius:10px; padding:1.25rem 1.4rem; margin-bottom:1.4rem; box-shadow:0 1px 3px #0001; }
-  .card--hits { border-top:5px solid var(--green); }
-  .card--niches { border-top:5px solid var(--purple); }
-  .card--compare { border-top:5px solid var(--ink); }
-  .section-label { display:inline-block; margin:0 0 .55rem; padding:.2rem .6rem; border-radius:4px; background:#e9f7ee; color:#08682e; font-size:.78rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
-  .card--niches .section-label { background:#f3ecf8; color:#603482; }
-  .card--compare .section-label { background:#eee; color:#333; }
-  h2 { margin:0 0 .8rem; font-size:1.25rem; }
-  h3 { font-size:1.05rem; margin:1.2rem 0 .4rem; }
-  p { margin:.55rem 0; }
-  a { color:#087b35; }
-  a:focus-visible, select:focus-visible { outline:3px solid #1454a1; outline-offset:2px; }
-  .lead { font-size:1.08rem; max-width:75ch; }
-  .summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(185px,1fr)); gap:.8rem; margin:1rem 0; }
-  .summary div { background:#eff9f2; border-left:4px solid var(--green); padding:.8rem 1rem; border-radius:5px; }
-  .summary strong { display:block; font-size:1.45rem; }
-  .summary span,.small { color:var(--muted); font-size:.9rem; }
-  .callout { border-left:4px solid var(--ink); background:#f3f5f4; padding:.8rem 1rem; margin:1rem 0; }
-  .card--hits .callout { border-color:var(--green); background:#f2faf5; }
-  .card--niches .callout { border-color:var(--purple); background:#f7f2fa; }
-  .table-wrap { overflow-x:auto; }
-  table { border-collapse:collapse; width:100%; min-width:730px; font-size:.93rem; }
-  th,td { padding:.65rem .55rem; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap; }
-  th:first-child,td:first-child { text-align:left; }
-  thead th { background:#eff9f2; }
-  .card--niches thead th { background:#f3ecf8; }
-  .card--niches a { color:#69418b; }
-  tbody tr:nth-child(even) { background:#fafafa; }
-  .song { font-weight:600; }
-  .song small { display:block; color:var(--muted); font-weight:400; }
-  .metric-control { display:flex; flex-wrap:wrap; align-items:center; gap:.6rem; margin:1rem 0; }
-  .legend { display:flex; flex-wrap:wrap; gap:.55rem 1.2rem; margin:.8rem 0 1rem; font-size:.9rem; }
-  .legend span { display:inline-flex; align-items:center; gap:.4rem; }
-  .legend i { display:inline-block; width:.9rem; height:.9rem; border-radius:3px; background:var(--green); }
-  .legend .niche-key { background:var(--purple); }
-  .legend .base-key { background:#424242; }
-  select { font:inherit; border:1px solid #777; border-radius:5px; padding:.4rem .6rem; background:white; }
-  .plot { display:grid; gap:.7rem; }
-  .bar-row { display:grid; grid-template-columns:minmax(115px,190px) 1fr 58px; align-items:center; gap:.55rem; font-size:.92rem; }
-  .bar-track { background:#e9e9e9; height:18px; border-radius:4px; overflow:hidden; }
-  .bar { background:#159447; height:100%; border-radius:4px; }
-  .bar-row.niche .bar { background:var(--purple); }
-  .bar-row.baseline { border-top:1px solid var(--line); padding-top:.8rem; margin-top:.2rem; }
-  .bar-row.baseline .bar { background:#424242; }
-  .bar-row strong { text-align:right; font-variant-numeric:tabular-nums; }
-  .finding-list { padding-left:1.3rem; }
-  .finding-list li { margin:.6rem 0; }
-  footer { text-align:center; color:var(--muted); font-size:.85rem; padding:1.5rem; }
-  @media (max-width:600px) { .bar-row { grid-template-columns:100px 1fr 43px; font-size:.78rem; } main { padding:1rem; } .card { padding:1rem; } }
+:root{--green:#087b35;--purple:#69418b;--blue:#185c95;--ink:#191414;--muted:#535353;--bg:#f7f7f7;--line:#dedee3}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+header{background:var(--ink);color:#fff;padding:1.8rem max(1.5rem,calc((100% - 1100px)/2))}header h1{margin:0 0 .4rem;font-size:1.7rem;line-height:1.25}header p{margin:0;color:#ddd;max-width:75ch}
+nav{background:#252525;padding:.7rem max(1.5rem,calc((100% - 1100px)/2));display:flex;gap:.65rem;flex-wrap:wrap}nav a{color:white;text-decoration:none;padding:.45rem .8rem;border-radius:6px}nav a:hover,nav a[aria-current=page]{background:#1db954;color:#111}
+main{max-width:1100px;margin:auto;padding:1.5rem}.card{background:white;border-radius:10px;padding:1.4rem;margin-bottom:1.4rem;box-shadow:0 1px 3px #0001}h2{font-size:1.3rem;margin:0 0 .65rem}h3{font-size:1.05rem;margin:0 0 .45rem}p{margin:.55rem 0}a{color:var(--green);text-underline-offset:3px}a:focus-visible,button:focus-visible,select:focus-visible,summary:focus-visible,.table-wrap:focus-visible{outline:3px solid #69418b;outline-offset:3px}code{background:#eee;padding:.08rem .25rem;border-radius:3px;overflow-wrap:anywhere}
+.eyebrow{font-size:.77rem;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:var(--purple);margin:0 0 .4rem}.small{font-size:.88rem;color:var(--muted)}.callout{border-left:4px solid #8150ab;background:#f7f2fa;padding:.85rem 1rem;border-radius:5px;margin:1rem 0}.callout p{margin:.25rem 0}.groups{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:1.1rem}.group-card{border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:7px;padding:1rem}.group-card h3{color:var(--accent)}.group-card p{font-size:.9rem}.group-card strong{font-size:1.2rem}.controls{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:1rem 0}select{font:inherit;padding:.5rem .7rem;border:1px solid #777;border-radius:6px;background:white;max-width:100%}.table-wrap{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:7px}table{border-collapse:collapse;width:100%;min-width:950px;font-size:.88rem}th,td{padding:.8rem .6rem;text-align:right;border-bottom:1px solid var(--line);vertical-align:top}th:first-child,td:first-child{text-align:left;min-width:245px;max-width:320px}thead{background:#f3f1f6}th{white-space:nowrap}tbody tr:nth-child(even){background:#fcfcfc}td.num{font-variant-numeric:tabular-nums;white-space:nowrap}td a.song{font-weight:650}.artist{display:block;margin:.25rem 0}.badge{display:inline-block;font-size:.73rem;border-radius:4px;padding:.12rem .4rem;background:#eaf5ee;color:#166336}.badge.uncertain{background:#fff2dc;color:#795100}.badge.missing{background:#eee;color:#535353}details{margin:.45rem 0}summary{cursor:pointer;color:var(--purple);font-size:.88rem}details p{font-size:.85rem;overflow-wrap:anywhere}details dl{font-size:.85rem}details dd{margin:0 0 .7rem}details dt{font-weight:650}.source-links{font-size:.85rem}.source-links a{display:inline-block;margin-right:.7rem}.medians{display:grid;gap:.8rem;margin:1.3rem 0}.bar-row{display:grid;grid-template-columns:210px 1fr 60px;gap:.75rem;align-items:center}.bar-track{height:18px;background:#ededf0;border-radius:4px;overflow:hidden}.bar{height:100%;border-radius:4px}.bar-row strong{text-align:right;font-variant-numeric:tabular-nums}.baseline{border-top:1px solid var(--line);padding-top:.8rem}.findings{border-top:1px solid var(--line);padding-top:.65rem}.findings p{max-width:85ch}.method-list{padding-left:1.2rem}.method-list li{margin:.5rem 0}.status-legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem;margin:.8rem 0}.status-legend span{font-size:.83rem}.section-note{max-width:85ch}footer{text-align:center;color:var(--muted);font-size:.85rem;padding:1.5rem}
+@media(max-width:680px){main{padding:1rem}.card{padding:1rem}.groups{grid-template-columns:1fr}.group-card{padding:.8rem}.group-card p{margin:.3rem 0}.bar-row{grid-template-columns:125px 1fr 45px;font-size:.8rem;gap:.5rem}header h1{font-size:1.45rem}.controls label{width:100%}select{width:100%}}
 </style>
 </head>
 <body>
-<header>
-  <h1>Hits mundiais e sucessos de nicho</h1>
-  <p>Dois recortes para discutir características musicais e limites da base Spotify.</p>
-</header>
-<nav aria-label="Navegação principal">
-  <a href="index.html">Visão geral da base</a>
-  <a href="hits-mundiais.html" aria-current="page">Hits e nichos</a>
-  <a href="emotify.html">Música e emoção</a>
-</nav>
+<header><h1>Músicas populares e características sonoras</h1><p>Trinta vídeos em três recortes: audiência no YouTube e atributos das gravações disponíveis na base Spotify.</p></header>
+<nav aria-label="Navegação principal"><a href="index.html">Visão geral da base</a><a href="hits-mundiais.html" aria-current="page">Hits e nichos</a><a href="emotify.html">Música e emoção</a></nav>
 <main>
-  <section class="card card--hits" aria-labelledby="hits">
-    <span class="section-label">01 · Hits mundiais</span>
-    <h2 id="hits">Cinco clipes que alcançaram o mundo</h2>
-    <p class="lead">Selecionamos os cinco clipes musicais mais vistos na <a href="https://blog.youtube/creator-and-artist-stories/10-years-of-youtubes-billion-views-club-psy-gangnam-style/">lista retrospectiva publicada pelo YouTube em 2022</a>: “Despacito”, “Shape of You”, “See You Again”, “Uptown Funk” e “Gangnam Style”. Para cada um, localizamos uma gravação na <a href="https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset">Spotify Tracks Dataset</a> pelo identificador da faixa.</p>
-    <div class="summary">
-      <div><strong>5</strong><span>hits mundiais analisados</span></div>
-      <div><strong id="corpus-count">—</strong><span>faixas únicas na base de comparação</span></div>
-      <div><strong>2022</strong><span>ano da lista de clipes usada na seleção</span></div>
-    </div>
-    <div class="callout"><strong>Critério dos hits.</strong> A seleção usa visualizações de clipes no YouTube, conforme o ranking publicado em 2022. As medidas de áudio abaixo descrevem as gravações correspondentes no Spotify. O ranking não é atual e as características não explicam por que os clipes fizeram sucesso.</div>
-    <h3>Características das gravações</h3>
-    <p>As medidas entre 0 e 1 são escores de áudio. <strong>Dançabilidade</strong> descreve a adequação do ritmo à dança; <strong>energia</strong>, a intensidade percebida; <strong>valência</strong>, a positividade sonora; <strong>acusticidade</strong>, a probabilidade de caráter acústico. <strong>Tempo</strong> está em BPM.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th scope="col">Gravação</th><th scope="col">Dançabilidade</th><th scope="col">Energia</th><th scope="col">Valência</th><th scope="col">Acusticidade</th><th scope="col">Tempo (BPM)</th></tr></thead>
-        <tbody id="tracks-table"></tbody>
-        <tfoot id="medians-table"></tfoot>
-      </table>
-    </div>
-    <p class="small">Fonte dos valores: CSV original da Spotify Tracks Dataset, após remover duplicatas de <code>track_id</code>. Cada linha acima usa um ID específico, evitando covers e remixes. Clique no título para abrir a faixa no Spotify.</p>
-    <h3>O que aparece nos cinco hits?</h3>
-    <ul class="finding-list">
-      <li>As cinco gravações têm dançabilidade acima da mediana da base (<strong>0,576</strong>). A mediana entre os cinco casos é <strong>0,727</strong>.</li>
-      <li>A valência varia bastante: de <strong>0,283</strong> em “See You Again” a <strong>0,931</strong> em “Shape of You”. Logo, positividade sonora alta não é uma característica compartilhada por todos.</li>
-      <li>A energia também varia (<strong>0,481–0,937</strong>), assim como o tempo (<strong>80–178 BPM</strong>, arredondado). Não surge um único perfil de intensidade ou andamento.</li>
-      <li>Quatro gravações têm instrumentalidade próxima de zero e “Uptown Funk” chega a <strong>0,000082</strong>. Como a mediana da base também é praticamente nula (<strong>0,000058</strong>, com a maioria das faixas concentrada próxima de zero), esse indicador reflete o padrão geral do catálogo e não distingue este grupo da faixa típica.</li>
-    </ul>
-  </section>
-
-  <section class="card card--niches" aria-labelledby="nichos">
-    <span class="section-label">02 · Sucessos de nicho</span>
-    <h2 id="nichos">Cinco gêneros, cinco faixas em destaque</h2>
-    <p>Escolhemos cinco rótulos da base com perfis sonoros distintos: <code>heavy-metal</code>, <code>bluegrass</code>, <code>classical</code>, <code>drum-and-bass</code> e <code>tango</code>.</p>
-    <div class="callout"><strong>Critério dos nichos.</strong> Em cada rótulo, selecionamos uma faixa com o maior score <code>popularity</code> registrado no CSV. Em caso de empate, usamos o ID fixado no script. A mediana do respectivo gênero dá contexto ao score da faixa.</div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th scope="col">Gravação e rótulo da base</th><th scope="col">Popularity</th><th scope="col">Mediana do gênero</th><th scope="col">Dançabilidade</th><th scope="col">Energia</th><th scope="col">Valência</th><th scope="col">Acusticidade</th></tr></thead>
-        <tbody id="niches-table"></tbody>
-      </table>
-    </div>
-    <p class="small">O score <code>popularity</code> varia de 0 a 100 e reflete o desempenho no Spotify no momento em que a base foi coletada; não é uma contagem de fãs do gênero nem uma medida atual. Os rótulos de gênero vêm da base e podem incluir classificações discutíveis. Número de faixas únicas por rótulo, na ordem da tabela: <span id="niche-count">—</span>.</p>
-  </section>
-
-  <section class="card card--compare" aria-labelledby="comparacao">
-    <span class="section-label">03 · Comparação</span>
-    <h2 id="comparacao">Explore os dois grupos</h2>
-    <p>Escolha quais músicas mostrar e qual característica comparar. As barras verdes representam hits mundiais; as roxas, faixas de nicho. A barra cinza mostra a mediana de todas as faixas únicas da base.</p>
-    <div class="metric-control">
-      <label for="group">Grupo:</label>
-      <select id="group">
-        <option value="both">Os dois grupos</option>
-        <option value="hits">Só hits mundiais</option>
-        <option value="niches">Só faixas de nicho</option>
-      </select>
-      <label for="feature">Característica musical:</label>
-      <select id="feature">
-        <option value="danceability">Dançabilidade</option>
-        <option value="energy">Energia</option>
-        <option value="valence">Valência</option>
-        <option value="acousticness">Acusticidade</option>
-      </select>
-    </div>
-    <div class="legend" aria-hidden="true"><span><i></i> Hits mundiais</span><span><i class="niche-key"></i> Sucessos de nicho</span><span><i class="base-key"></i> Mediana da base</span></div>
-    <div id="plot" class="plot" role="img" aria-label="Comparação da característica selecionada"></div>
-    <p id="plot-caption" class="small"></p>
-    <div class="callout"><strong>Como ler a comparação.</strong> Os grupos foram selecionados por medidas diferentes: visualizações de clipes no YouTube e score de popularidade no Spotify. A mediana da base oferece uma referência geral, não um controle por gênero ou época. Use as diferenças como perguntas para investigar, não como prova de uma regra.</div>
-  </section>
-
-  <section class="card" aria-labelledby="discussao">
-    <h2 id="discussao">Perguntas para a reunião</h2>
-    <ul class="finding-list">
-      <li><strong>Dançabilidade é necessária?</strong> Todos os cinco hits estão acima da mediana da base (0,576). Entre as cinco faixas de nicho, quatro ficam abaixo da mediana (com o tango “Por Una Cabeza” em 0,387) e apenas “Daylight” (bluegrass) fica em 0,582, ligeiramente acima. O contraste, portanto, não é categórico; uma amostra maior e pareada por gênero e época permitiria testar essa diferença com rigor estatístico.</li>
-      <li><strong>Existe um perfil sonoro único entre nichos?</strong> “One Night in Tokyo” tem energia 0,977 e acusticidade próxima de zero; “Experience” tem energia 0,449 e acusticidade 0,934; “Por Una Cabeza” tem andamento de 62 BPM e energia de 0,258. Essas faixas alcançam destaque em suas comunidades com perfis sonoros diametralmente opostos.</li>
-      <li><strong>Como definir sucesso no TCC?</strong> Visualizações de clipe, score de popularidade e posição em parada são medidas distintas. Uma próxima etapa seria obter uma fonte externa comum aos dois grupos e comparar faixas do mesmo período.</li>
-    </ul>
-    <p class="small">Os grupos foram construídos por critérios diferentes e têm cinco gravações em cada grupo (n=5). As diferenças observadas são descritivas; não representam todos os gêneros nem permitem atribuir sucesso às características de áudio.</p>
-  </section>
-
-  <section class="card" aria-labelledby="metodo">
-    <h2 id="metodo">Como reproduzir</h2>
-    <ol>
-      <li>Baixe o <a href="https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset/blob/main/dataset.csv">dataset.csv</a> e coloque em <code>data/dataset.csv</code>.</li>
-      <li>Execute <code>python scripts/build_global_hits.py</code> na raiz do repositório. O script recria os valores desta página em <code>docs/assets/hits-data.js</code>.</li>
-      <li>Confira os dez <code>track_id</code> fixados no script. Eles identificam as gravações analisadas, independentemente de nomes repetidos.</li>
-    </ol>
-    <p class="small">As medianas da base são calculadas após manter a primeira ocorrência de cada <code>track_id</code>, seguindo o procedimento da página geral. Para as medianas por gênero, cada <code>track_id</code> é contado uma vez dentro do respectivo rótulo. A seleção dos hits usa a ordem da lista do YouTube em 2022. A correspondência entre clipe e gravação foi feita por título e artista; o CSV não contém o ID dos vídeos.</p>
-  </section>
+<section class="card" aria-labelledby="intro"><p class="eyebrow">Seleção exploratória · coleta em setembro de 2026</p><h2 id="intro">Popularidade com uma medida visível</h2>
+<p>As <strong>visualizações do vídeo escolhido</strong> documentam sua audiência no YouTube. Os atributos de áudio vêm do CSV do Spotify. São fontes diferentes: a contagem não soma outros uploads da música e não representa ouvintes únicos.</p>
+<div class="callout"><p><strong>Seleções de casos, não três rankings universais.</strong> Os grupos têm critérios distintos e não representam todos os gêneros. A ordem nas tabelas segue as visualizações coletadas; ela não prova que estes sejam os vídeos mais vistos fora da seleção.</p></div>
+<div class="groups" id="group-cards"></div>
+<p class="small" id="coverage"></p>
+<noscript><p>Ative JavaScript para visualizar as tabelas e comparações. Os dados completos estão no <a href="https://github.com/Muowl/spotify-dataset-explorer/blob/main/data/youtube-selection.json">arquivo de seleção</a>.</p></noscript>
+</section>
+<section class="card" aria-labelledby="songs"><p class="eyebrow">01 · Explore as gravações</p><h2 id="songs">Audiência e características de cada faixa</h2>
+<div class="controls"><label for="group">Seleção:</label><select id="group"><option value="global">Alcance global</option><option value="metal">Metal e subgêneros</option><option value="classical">Repertório clássico</option></select></div>
+<p id="group-criterion" class="section-note" aria-live="polite"></p>
+<p class="small">Dançabilidade, energia, valência, acusticidade e instrumentalidade usam escala de 0 a 1. Valência descreve positividade sonora, não a emoção do ouvinte. <a href="index.html#campos">Entenda os campos</a>.</p>
+<div class="status-legend"><span><span class="badge">Documental</span> Catálogo associado ao vídeo</span><span><span class="badge uncertain">Incerta</span> Versão não resolvida</span><span><span class="badge missing">Não localizada</span> Sem registro encontrado</span></div>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Tabela de músicas; role horizontalmente para ver todos os atributos"><table><caption id="table-caption" class="small" style="text-align:left;padding:.7rem"></caption><thead><tr><th scope="col">Música / correspondência</th><th scope="col">Visualizações</th><th scope="col">Dançabilidade</th><th scope="col">Energia</th><th scope="col">Valência</th><th scope="col">Acusticidade</th><th scope="col">Instrumentalidade</th></tr></thead><tbody id="tracks"></tbody></table></div>
+<p class="small">“—” significa atributo não utilizado, nunca zero. Casos incertos e não localizados ficam fora das medianas. “Documental” indica conferência de metadados; não houve identificação por impressão digital de áudio. O clipe pode ter edição diferente da faixa de catálogo.</p>
+</section>
+<section class="card" aria-labelledby="compare"><p class="eyebrow">02 · Comparação descritiva</p><h2 id="compare">O que muda entre os casos selecionados?</h2><p>Compare as medianas dos atributos do CSV, usando apenas as associações documentais. O número de faixas utilizadas aparece em cada grupo.</p>
+<div class="controls"><label for="feature">Característica:</label><select id="feature"><option value="danceability">Dançabilidade</option><option value="energy">Energia</option><option value="valence">Valência</option><option value="acousticness">Acusticidade</option><option value="instrumentalness">Instrumentalidade</option></select></div>
+<div id="medians" class="medians" aria-live="polite"></div><p class="small">Escala de 0 a 1. A mediana da base é uma referência geral, sem controle por gênero, época, artista ou duração.</p><div id="findings" class="findings"></div>
+<div class="callout"><p><strong>Estas diferenças não explicam o sucesso.</strong> A amostra é intencional, inclui artistas e obras repetidos e depende da disponibilidade de gravações. Visualizações acumuladas também dependem da idade do vídeo e de sua exposição. Não há teste de significância nem inferência causal.</p></div>
+</section>
+<section class="card" aria-labelledby="method"><p class="eyebrow">03 · Fontes e limites</p><h2 id="method">Como a seleção foi construída</h2>
+<ol class="method-list"><li><strong>Alcance global:</strong> dez candidatos da <a href="https://kworb.net/youtube/topvideos.html">lista de clipes acompanhada pelo Kworb</a>, consultada em 26/09/2026. “Shree Hanuman Chalisa”, de Hariharan, permanece na seleção: o recorte não restringe idioma ou região. “Axel F” e “Dame Tu Cosita” permanecem visíveis, sem atributos substitutos.</li>
+<li><strong>Metal:</strong> dez candidatos da <a href="https://chaoszine.net/youtube-turns-20-these-are-the-most-watched-metal-videos-in-the-world/">matéria da Chaoszine de 24/04/2025</a>, incluindo subgêneros e baladas. As contagens foram coletadas nos vídeos, não copiadas da matéria. O grupo não é um levantamento exaustivo de metal.</li>
+<li><strong>Clássica:</strong> busca iniciada nas gravações do CSV, seguida de conferência de compositor, obra, intérpretes, álbum e duração. O recorte reúne repertório de concerto, sem aceitar automaticamente o rótulo <code>classical</code> da base. Obras conhecidas podem ter audiência relativamente pequena no upload correspondente; não foi estabelecido um limiar de popularidade.</li>
+<li><strong>Unidade e data:</strong> um vídeo por caso, sem somar reuploads. Foram incluídos clipes e áudios oficiais; a diferença de formato limita a comparação de audiência. Cada linha informa a data da consulta e cada registro preserva seu horário UTC. Os valores são históricos, não contadores ao vivo.</li>
+<li><strong>Correspondência:</strong> links e justificativas ficam em “Conferir versão e fontes”. Diferenças não resolvidas são sinalizadas. Não usamos outra execução da mesma composição para preencher um atributo ausente.</li></ol>
+<p>O <code>popularity</code> do Spotify aparece apenas nos detalhes, como valor histórico do CSV. Ele não orienta a ordenação nem equivale às visualizações. <a href="https://developer.spotify.com/documentation/web-api/reference/get-track">Definição oficial do Spotify</a>.</p>
+<details><summary>Reproduzir a comparação e conferir a seleção</summary><p>Baixe o <a href="https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset/blob/main/dataset.csv">CSV original</a> para <code>data/dataset.csv</code> e execute <code>python scripts/build_global_hits.py</code>. O script confere o SHA-256 do CSV, os IDs e os metadados esperados, elimina duplicatas por <code>track_id</code> mantendo a primeira ocorrência e calcula as medianas.</p><p>As visualizações ficam congeladas no <a href="https://github.com/Muowl/spotify-dataset-explorer/blob/main/data/youtube-selection.json">arquivo de seleção e evidências</a>. Reexecutar o script não coleta novos números. Mudanças de vídeo, versão ou critério exigem nova conferência. <a href="https://github.com/Muowl/spotify-dataset-explorer/blob/main/research/youtube-method.md">Notas da pesquisa</a>.</p></details>
+<p class="small">Para o TCC: estes dados agregados não permitem testar mudanças de preferência individual conforme dia, horário ou contexto.</p>
+</section>
 </main>
 <footer>Projeto acadêmico de exploração de dados musicais para o TCC de Sistemas de Informação — UFJF · <a href="https://github.com/Muowl/spotify-dataset-explorer">Repositório no GitHub</a></footer>
 <script src="assets/hits-data.js"></script>
 <script>
-(() => {
-  const data = window.HITS_DATA;
-  if (!data) return;
-  const fmt = value => Number(value).toFixed(3).replace('.', ',');
-  document.getElementById('corpus-count').textContent = data.unique_tracks.toLocaleString('pt-BR');
-  const tbody = document.getElementById('tracks-table');
-  const fields = ['danceability', 'energy', 'valence', 'acousticness', 'tempo'];
-  function cell(row, value) {
-    const td = document.createElement('td');
-    td.textContent = value;
-    row.appendChild(td);
-  }
-  data.hits.forEach(hit => {
-    const tr = document.createElement('tr');
-    const td = document.createElement('td');
-    td.className = 'song';
-    const a = document.createElement('a');
-    a.href = 'https://open.spotify.com/track/' + encodeURIComponent(hit.track_id);
-    a.textContent = hit.title;
-    td.appendChild(a);
-    const artist = document.createElement('small');
-    artist.textContent = hit.artist;
-    td.appendChild(artist);
-    tr.appendChild(td);
-    fields.forEach(field => cell(tr, field === 'tempo' ? Math.round(hit.features[field]).toLocaleString('pt-BR') : fmt(hit.features[field])));
-    tbody.appendChild(tr);
-  });
-  const nicheTable = document.getElementById('niches-table');
-  data.niches.forEach(track => {
-    const tr = document.createElement('tr');
-    const td = document.createElement('td');
-    td.className = 'song';
-    const a = document.createElement('a');
-    a.href = 'https://open.spotify.com/track/' + encodeURIComponent(track.track_id);
-    a.textContent = track.title;
-    td.appendChild(a);
-    const detail = document.createElement('small');
-    detail.textContent = track.artist + ' · ' + track.genre;
-    td.appendChild(detail);
-    tr.appendChild(td);
-    cell(tr, String(track.popularity));
-    cell(tr, String(track.genre_median_popularity));
-    ['danceability', 'energy', 'valence', 'acousticness'].forEach(field => cell(tr, fmt(track.features[field])));
-    nicheTable.appendChild(tr);
-  });
-  document.getElementById('niche-count').textContent = data.niches.map(track => track.genre_tracks.toLocaleString('pt-BR')).join(', ');
-  const foot = document.getElementById('medians-table');
-  [['Mediana dos 5 hits', data.hits_median], ['Mediana da base', data.corpus_median]].forEach(([label, metrics]) => {
-    const tr = document.createElement('tr');
-    const th = document.createElement('th');
-    th.scope = 'row'; th.textContent = label; tr.appendChild(th);
-    fields.forEach(field => cell(tr, field === 'tempo' ? Math.round(metrics[field]).toLocaleString('pt-BR') : fmt(metrics[field])));
-    foot.appendChild(tr);
-  });
-  const feature = document.getElementById('feature');
-  const group = document.getElementById('group');
-  const plot = document.getElementById('plot');
-  function draw() {
-    const key = feature.value;
-    plot.replaceChildren();
-    const rows = [];
-    if (group.value !== 'niches') data.hits.forEach(hit => rows.push([hit.title, hit.features[key], 'hit']));
-    if (group.value !== 'hits') data.niches.forEach(track => rows.push([track.title, track.features[key], 'niche']));
-    rows.push(['Mediana da base', data.corpus_median[key], 'baseline']);
-    rows.forEach(([name, value, type]) => {
-      const row = document.createElement('div'); row.className = 'bar-row' + (type === 'baseline' ? ' baseline' : type === 'niche' ? ' niche' : '');
-      const label = document.createElement('span'); label.textContent = name;
-      const track = document.createElement('div'); track.className = 'bar-track';
-      const bar = document.createElement('div'); bar.className = 'bar'; bar.style.width = (value * 100) + '%';
-      track.appendChild(bar);
-      const number = document.createElement('strong'); number.textContent = fmt(value);
-      row.append(label, track, number); plot.appendChild(row);
-    });
-    const name = feature.options[feature.selectedIndex].text;
-    plot.setAttribute('aria-label', name + ': ' + rows.map(([title, value]) => title + ' ' + fmt(value)).join('; '));
-    document.getElementById('plot-caption').textContent = name + ' em escala de 0 a 1. Verde: hits mundiais; roxo: faixas de nicho; cinza: mediana das ' + data.unique_tracks.toLocaleString('pt-BR') + ' faixas únicas.';
-  }
-  feature.addEventListener('change', draw);
-  group.addEventListener('change', draw);
-  draw();
+(()=>{
+const data=window.HITS_DATA;if(!data)return;
+const $=id=>document.getElementById(id),fmt=n=>Number(n).toFixed(3).replace('.',','),count=n=>n.toLocaleString('pt-BR');
+const date=s=>new Intl.DateTimeFormat('pt-BR',{timeZone:'America/Sao_Paulo'}).format(new Date(s));
+const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x};
+const link=(text,url,cls)=>{const a=el('a',text,cls);a.href=url;return a};
+const status={catalogue:['Documental',''],uncertain:['Incerta','uncertain'],missing:['Não localizada','missing']};
+for(const g of data.groups){const c=el('div',undefined,'group-card');c.style.setProperty('--accent',g.color);c.append(el('h3',g.label),el('strong','10 vídeos'),el('p',g.n+' faixas na comparação de áudio'));$('group-cards').append(c)}
+$('coverage').textContent='30 vídeos · '+data.groups.reduce((s,g)=>s+g.n,0)+' associações documentais · 3 versões incertas · 2 músicas não localizadas. Base de referência: '+count(data.unique_tracks)+' faixas únicas.';
+function table(){const g=data.groups.find(g=>g.id===$('group').value);$('group-criterion').textContent=g.criterion;$('table-caption').textContent=g.label+' · ordem decrescente de visualizações entre os dez casos selecionados.';$('tracks').replaceChildren();
+for(const v of g.items){const tr=el('tr'),name=el('td');name.append(link(v.display_title,v.source_url,'song'),el('span',v.artist,'artist small'),el('span',status[v.match_status][0],'badge '+status[v.match_status][1]));const detail=el('details');detail.append(el('summary','Conferir versão e fontes'),el('p',v.match_note));if(v.album)detail.append(el('p','Álbum no CSV: '+v.album));if(v.popularity!==null)detail.append(el('p','Popularity histórico no CSV: '+v.popularity+'/100.'));const links=el('div',undefined,'source-links');links.append(link('Vídeo no YouTube',v.source_url));if(v.track_id)links.append(link('Registro no Spotify','https://open.spotify.com/track/'+v.track_id));detail.append(links,el('p','Canal: '+v.channel+'. Coleta UTC: '+v.collected_at,'small'));name.append(detail);tr.append(name);const views=el('td',count(v.views),'num');views.append(el('div','consulta '+date(v.collected_at),'small'));tr.append(views);for(const f of ['danceability','energy','valence','acousticness','instrumentalness'])tr.append(el('td',v.features?fmt(v.features[f]):'—','num'));$('tracks').append(tr)}
+}
+function chart(){const key=$('feature').value;$('medians').replaceChildren();const rows=data.groups.map(g=>({label:g.label+' (n='+g.n+')',value:g.median[key],color:g.color}));rows.push({label:'Base (n='+count(data.unique_tracks)+')',value:data.corpus_median[key],color:'#535353'});rows.forEach((r,i)=>{const row=el('div',undefined,'bar-row'+(i===3?' baseline':'')),track=el('div',undefined,'bar-track'),bar=el('div',undefined,'bar');bar.style.width=(r.value*100)+'%';bar.style.background=r.color;track.setAttribute('aria-hidden','true');track.append(bar);row.append(el('span',r.label),track,el('strong',fmt(r.value)));$('medians').append(row)})}
+const [global,metal,classical]=data.groups;
+$('findings').append(el('p','Nos casos incluídos, a mediana de dançabilidade é '+fmt(global.median.danceability)+' no grupo global, '+fmt(metal.median.danceability)+' no metal e '+fmt(classical.median.danceability)+' no repertório clássico. Esses valores descrevem apenas as faixas com associação documental.'),el('p','A mediana de instrumentalidade é '+fmt(global.median.instrumentalness)+', '+fmt(metal.median.instrumentalness)+' e '+fmt(classical.median.instrumentalness)+', respectivamente. O recorte clássico privilegia obras instrumentais; sua seleção já influencia esse contraste.'));
+$('group').addEventListener('change',table);$('feature').addEventListener('change',chart);table();chart();
 })();
 </script>
 </body>

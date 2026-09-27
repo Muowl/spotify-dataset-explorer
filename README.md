@@ -17,7 +17,7 @@ Não precisa instalar nada nem rodar código.
 ## Estrutura
 
 - `docs/index.html` - visualização estática com os gráficos
-- `docs/hits-mundiais.html` - análise de cinco hits, cinco faixas de nicho e comparação com a base
+- `docs/hits-mundiais.html` - 30 vídeos em três seleções (global, metal e clássica), com visualizações e atributos do CSV
 - `docs/emotify.html` - introdução à GEMS e exploração das anotações do Emotify
 - `docs/assets/emotify-data.js` - contagens reproduzíveis exibidas na página de música e emoção
 - `scripts/build_emotify.py` - processa o CSV oficial do Emotify sem dependências externas
@@ -32,8 +32,11 @@ A base não está versionada aqui (CSV de ~20 MB).
 
 O CSV do Emotify também não é versionado. Para atualizar sua página, baixe as anotações na [página oficial](https://www2.projects.science.uu.nl/memotion/emotifydata/) em `data/emotify.csv` e execute `python scripts/build_emotify.py`. Não confunda os dois conjuntos: o Spotify Tracks Dataset descreve faixas; o Emotify registra avaliações feitas por ouvintes e não contém IDs de faixas do Spotify para união direta.
 
-Para atualizar a análise, baixe o CSV em `data/dataset.csv` e execute `python scripts/build_global_hits.py` na raiz do projeto. O script usa apenas a biblioteca padrão do Python. A seleção dos hits segue os cinco clipes musicais mais vistos na [lista retrospectiva do YouTube de 2022](https://blog.youtube/creator-and-artist-stories/10-years-of-youtubes-billion-views-club-psy-gangnam-style/); cada clipe é associado a um `track_id` específico no CSV. As cinco faixas de nicho têm os maiores scores `popularity` em seus respectivos rótulos (`heavy-metal`, `bluegrass`, `classical`, `drum-and-bass` e `tango`), com desempate por ID fixado no script. Os grupos usam critérios de seleção diferentes; os dados de áudio são descritivos e não demonstram o motivo do sucesso.
+Para reproduzir a comparação de músicas populares, baixe o CSV em `data/dataset.csv` e execute `python scripts/build_global_hits.py`. O script usa a biblioteca padrão do Python, confere o SHA-256 do CSV e os metadados dos IDs selecionados. As visualizações e evidências estão congeladas em `data/youtube-selection.json`; executar o script não atualiza o YouTube.
+
+São dez vídeos por grupo: candidatos globais da lista do Kworb, metal e subgêneros a partir de uma matéria da Chaoszine e repertório clássico selecionado a partir das gravações do CSV. Não são três rankings universais. São 25 associações documentais usadas na comparação, três versões incertas excluídas dos cálculos e duas músicas sem registro localizado. Os detalhes de seleção e os limites estão em [research/youtube-method.md](research/youtube-method.md).
 
 Links:
 - [Kaggle](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset)
 - [Hugging Face](https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset)
+
