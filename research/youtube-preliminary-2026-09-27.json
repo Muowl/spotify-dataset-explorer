@@ -1,0 +1,858 @@
+{
+  "status": "preliminary_do_not_publish_as_confirmed_matches",
+  "dataset_url": "https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset",
+  "dataset_sha256": "b202fa49909b2d5cef71a04b1d21243cfeb36414535f2ca9272aa646721177bd",
+  "dataset_rows": 114000,
+  "unique_track_ids": 89741,
+  "collection_method": "Public YouTube watch pages: ytInitialPlayerResponse.videoDetails and playerMicroformatRenderer; no API. UTC timestamps per video. No audio fingerprint comparison.",
+  "selection_sources": {
+    "global": "https://kworb.net/youtube/topvideos.html",
+    "metal": "https://chaoszine.net/youtube-turns-20-these-are-the-most-watched-metal-videos-in-the-world/",
+    "classical": "Exploratory manual search for named classical works and performers; not an exhaustive ranking; ten videos, with repeated compositions and distinct performances."
+  },
+  "videos": [
+    {
+      "youtube_id": "kJQP7kiw5Fk",
+      "title": "Luis Fonsi - Despacito ft. Daddy Yankee",
+      "channel": "LuisFonsiVEVO",
+      "channel_id": "UCLp8RBhQHu9wSsq62j_Md6A",
+      "views": 9131235555,
+      "duration_seconds": 282,
+      "published": "2017-01-12T21:00:02-08:00",
+      "collected_at": "2026-09-27T01:10:24.602671+00:00",
+      "group": "global",
+      "artist_query": "Luis Fonsi",
+      "title_query": "Despacito",
+      "source_url": "https://www.youtube.com/watch?v=kJQP7kiw5Fk",
+      "spotify_candidates": [
+        {
+          "track_id": "6habFhsOp2NvshLv26DqMb",
+          "artists": "Luis Fonsi;Daddy Yankee",
+          "track_name": "Despacito",
+          "album_name": "VIDA",
+          "duration_ms": "229360"
+        },
+        {
+          "track_id": "6rPO02ozF3bM7NnOV4h6s2",
+          "artists": "Luis Fonsi;Daddy Yankee;Justin Bieber",
+          "track_name": "Despacito - Remix",
+          "album_name": "Despacito Feat. Justin Bieber (Remix)",
+          "duration_ms": "228826"
+        },
+        {
+          "track_id": "1vnnXMrBeEWiRg3YCMCjQq",
+          "artists": "Luis Fonsi;Daddy Yankee;Justin Bieber",
+          "track_name": "Despacito - Remix",
+          "album_name": "VIDA",
+          "duration_ms": "230413"
+        },
+        {
+          "track_id": "0R2d9y5VGS0572jO3HWa2b",
+          "artists": "Luis Fonsi;Daddy Yankee;Justin Bieber",
+          "track_name": "Despacito - Remix",
+          "album_name": "Tutti in piscina Canzoni per bambini",
+          "duration_ms": "230693"
+        },
+        {
+          "track_id": "1V23DFS7SiZDojkOipAkyJ",
+          "artists": "Luis Fonsi;Daddy Yankee;Justin Bieber",
+          "track_name": "Despacito - Remix",
+          "album_name": "10's Music Grandi Successi",
+          "duration_ms": "230693"
+        },
+        {
+          "track_id": "0lc1ey4GfBMzmSVCyQUUHX",
+          "artists": "Luis Fonsi;Daddy Yankee;Justin Bieber",
+          "track_name": "Despacito - Remix",
+          "album_name": "Halloween Party Canzoni per Bambini 2022",
+          "duration_ms": "230693"
+        },
+        {
+          "track_id": "46rKo4ijDOiDoAPDwxxxi0",
+          "artists": "Luis Fonsi;Daddy Yankee;Major Lazer;MOSKA",
+          "track_name": "Despacito - Major Lazer & MOSKA Remix",
+          "album_name": "Perreo Tenebroso Vol. 2",
+          "duration_ms": "190320"
+        },
+        {
+          "track_id": "7CUYHcu0RnbOnMz4RuN07w",
+          "artists": "Luis Fonsi;Daddy Yankee",
+          "track_name": "Despacito (Featuring Daddy Yankee)",
+          "album_name": "Despacito (Featuring Daddy Yankee)",
+          "duration_ms": "228200"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "RgKAFK5djSk",
+      "title": "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundtrack",
+      "channel": "Wiz Khalifa Music",
+      "channel_id": "UCLxOm-UQ1gtyQgfz8Rn34iQ",
+      "views": 7096444257,
+      "duration_seconds": 237,
+      "published": "2015-04-06T20:00:03-07:00",
+      "collected_at": "2026-09-27T01:10:24.690772+00:00",
+      "group": "global",
+      "artist_query": "Wiz Khalifa",
+      "title_query": "See You Again",
+      "source_url": "https://www.youtube.com/watch?v=RgKAFK5djSk",
+      "spotify_candidates": [
+        {
+          "track_id": "2JzZzZUQj3Qff7wapcbKjc",
+          "artists": "Wiz Khalifa;Charlie Puth",
+          "track_name": "See You Again (feat. Charlie Puth)",
+          "album_name": "See You Again (feat. Charlie Puth)",
+          "duration_ms": "229525"
+        },
+        {
+          "track_id": "62lmjlPu5Vwd3h18FMSz1G",
+          "artists": "Wiz Khalifa;Charlie Puth",
+          "track_name": "See You Again",
+          "album_name": "Give You Love - Cozy Hits",
+          "duration_ms": "229525"
+        },
+        {
+          "track_id": "0FtOxBrDP67usYNbqOuy7T",
+          "artists": "Wiz Khalifa;Charlie Puth",
+          "track_name": "See You Again",
+          "album_name": "On Chill - Rap & RnB",
+          "duration_ms": "229525"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "JGwWNGJdvx8",
+      "title": "Ed Sheeran - Shape of You (Official Music Video)",
+      "channel": "Ed Sheeran",
+      "channel_id": "UC0C-w0YjGpqDXGB8IHb662A",
+      "views": 6813332997,
+      "duration_seconds": 263,
+      "published": "2017-01-30T02:57:50-08:00",
+      "collected_at": "2026-09-27T01:10:24.380994+00:00",
+      "group": "global",
+      "artist_query": "Ed Sheeran",
+      "title_query": "Shape of You",
+      "source_url": "https://www.youtube.com/watch?v=JGwWNGJdvx8",
+      "spotify_candidates": [
+        {
+          "track_id": "7qiZfU4dY1lWllzX7mPBI3",
+          "artists": "Ed Sheeran",
+          "track_name": "Shape of You",
+          "album_name": "÷ (Deluxe)",
+          "duration_ms": "233712"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "k85mRPqvMbE",
+      "title": "Crazy Frog - Axel F (Official Video)",
+      "channel": "Crazy Frog",
+      "channel_id": "UC4XR0EZ0oHwSV2XhhShzX5A",
+      "views": 6199280273,
+      "duration_seconds": 172,
+      "published": "2009-06-16T21:30:53-07:00",
+      "collected_at": "2026-09-27T01:10:24.621625+00:00",
+      "group": "global",
+      "artist_query": "Crazy Frog",
+      "title_query": "Axel F",
+      "source_url": "https://www.youtube.com/watch?v=k85mRPqvMbE",
+      "spotify_candidates": [],
+      "match_status": "not_found_by_artist_title"
+    },
+    {
+      "youtube_id": "9bZkp7q19f0",
+      "title": "PSY - GANGNAM STYLE(강남스타일) M/V",
+      "channel": "officialpsy",
+      "channel_id": "UCrDkAvwZum-UTjHmzDI2iIw",
+      "views": 6074445788,
+      "duration_seconds": 252,
+      "published": "2012-07-15T00:46:32-07:00",
+      "collected_at": "2026-09-27T01:10:24.567846+00:00",
+      "group": "global",
+      "artist_query": "PSY",
+      "title_query": "Gangnam Style",
+      "source_url": "https://www.youtube.com/watch?v=9bZkp7q19f0",
+      "spotify_candidates": [
+        {
+          "track_id": "03UrZgTINDqvnUMbbIMhql",
+          "artists": "PSY",
+          "track_name": "Gangnam Style (강남스타일)",
+          "album_name": "Gangnam Style (강남스타일)",
+          "duration_ms": "219493"
+        },
+        {
+          "track_id": "2Qk3D872tEmCeSZ9lXIbbe",
+          "artists": "PSY",
+          "track_name": "Gangnam Style (강남스타일)",
+          "album_name": "Halloween Party Canzoni per Bambini 2022",
+          "duration_ms": "219493"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "OPf0YbXqDm0",
+      "title": "Mark Ronson - Uptown Funk (Official Video) ft. Bruno Mars",
+      "channel": "MarkRonsonVEVO",
+      "channel_id": "UCmfFGTSsfJVu6CGvL8r75qg",
+      "views": 5907832403,
+      "duration_seconds": 270,
+      "published": "2014-11-19T06:00:18-08:00",
+      "collected_at": "2026-09-27T01:10:30.758608+00:00",
+      "group": "global",
+      "artist_query": "Mark Ronson",
+      "title_query": "Uptown Funk",
+      "source_url": "https://www.youtube.com/watch?v=OPf0YbXqDm0",
+      "spotify_candidates": [
+        {
+          "track_id": "32OlwWuMpZ6b0aN2RZOeMS",
+          "artists": "Mark Ronson;Bruno Mars",
+          "track_name": "Uptown Funk (feat. Bruno Mars)",
+          "album_name": "Uptown Special",
+          "duration_ms": "269666"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "AETFvQonfV8",
+      "title": "श्री हनुमान चालीसा 🌺🙏| Shree Hanuman Chalisa Original Video |🙏🌺| GULSHAN KUMAR | HARIHARAN | 8K",
+      "channel": "T-Series Bhakti Sagar",
+      "channel_id": "UCaayLD9i5x4MmIoVZxXSv_g",
+      "views": 5754786306,
+      "duration_seconds": 582,
+      "published": "2011-05-09T18:35:09-07:00",
+      "collected_at": "2026-09-27T01:10:30.854735+00:00",
+      "group": "global",
+      "artist_query": "Hariharan",
+      "title_query": "Hanuman Chalisa",
+      "source_url": "https://www.youtube.com/watch?v=AETFvQonfV8",
+      "spotify_candidates": [
+        {
+          "track_id": "6H7fLdt0AeWpuxUKXuXWrx",
+          "artists": "Hariharan",
+          "track_name": "Shree Hanuman Chalisa",
+          "album_name": "Shree Hanuman Chalisa (Hanuman Ashtak)",
+          "duration_ms": "586075"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "FzG4uDgje3M",
+      "title": "El Chombo, Dancing Green Alien - Dame Tu Cosita feat. Cutty Ranks (Official Video)",
+      "channel": "Ultra Records",
+      "channel_id": "UC4rasfm9J-X4jNl9SvXp8xA",
+      "views": 5642716565,
+      "duration_seconds": 152,
+      "published": "2018-04-05T12:51:33-07:00",
+      "collected_at": "2026-09-27T01:10:30.775622+00:00",
+      "group": "global",
+      "artist_query": "El Chombo",
+      "title_query": "Dame Tu Cosita",
+      "source_url": "https://www.youtube.com/watch?v=FzG4uDgje3M",
+      "spotify_candidates": [],
+      "match_status": "not_found_by_artist_title"
+    },
+    {
+      "youtube_id": "pRpeEdMmmQ0",
+      "title": "Shakira - Waka Waka (This Time for Africa) (The Official 2010 FIFA World Cup™ Song)",
+      "channel": "shakiraVEVO",
+      "channel_id": "UCGnjeahCJW1AF34HBmQTJ-Q",
+      "views": 4770648316,
+      "duration_seconds": 211,
+      "published": "2010-06-04T15:30:35-07:00",
+      "collected_at": "2026-09-27T01:10:31.062997+00:00",
+      "group": "global",
+      "artist_query": "Shakira",
+      "title_query": "Waka Waka",
+      "source_url": "https://www.youtube.com/watch?v=pRpeEdMmmQ0",
+      "spotify_candidates": [
+        {
+          "track_id": "2Cd9iWfcOpGDHLz6tVA3G4",
+          "artists": "Shakira;Freshlyground",
+          "track_name": "Waka Waka (This Time for Africa) [The Official 2010 FIFA World Cup (TM) Song] (feat. Freshlyground)",
+          "album_name": "Waka Waka (This Time for Africa) [The Official 2010 FIFA World Cup (TM) Song] (feat. Freshlyground)",
+          "duration_ms": "202626"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "hT_nvWreIhg",
+      "title": "OneRepublic - Counting Stars",
+      "channel": "OneRepublicVEVO",
+      "channel_id": "UCQ5kHOKpF3-1_UCKaqXARRg",
+      "views": 4518101480,
+      "duration_seconds": 283,
+      "published": "2013-05-31T00:00:36-07:00",
+      "collected_at": "2026-09-27T01:10:30.825099+00:00",
+      "group": "global",
+      "artist_query": "OneRepublic",
+      "title_query": "Counting Stars",
+      "source_url": "https://www.youtube.com/watch?v=hT_nvWreIhg",
+      "spotify_candidates": [
+        {
+          "track_id": "2tpWsVSb9UEmDRxAl1zhX1",
+          "artists": "OneRepublic",
+          "track_name": "Counting Stars",
+          "album_name": "Native",
+          "duration_ms": "257266"
+        },
+        {
+          "track_id": "4KX7jXWbf6SivrmBHMuDuj",
+          "artists": "OneRepublic",
+          "track_name": "Counting Stars",
+          "album_name": "Отново на училище",
+          "duration_ms": "256760"
+        },
+        {
+          "track_id": "0vB1pgTJie4BLnE5Dl0lJO",
+          "artists": "OneRepublic",
+          "track_name": "Counting Stars",
+          "album_name": "Almorzando solo",
+          "duration_ms": "256760"
+        },
+        {
+          "track_id": "0FBywYb06nuyLdn4gBlQLb",
+          "artists": "OneRepublic",
+          "track_name": "Counting Stars",
+          "album_name": "Fiesta de disfraces vol. II",
+          "duration_ms": "256760"
+        },
+        {
+          "track_id": "6sy3LkhNFjJWlaeSMNwQ62",
+          "artists": "OneRepublic",
+          "track_name": "Counting Stars",
+          "album_name": "Native",
+          "duration_ms": "257839"
+        },
+        {
+          "track_id": "6QvyaYlJSCW6ft7dYHNxBA",
+          "artists": "OneRepublic",
+          "track_name": "Counting Stars",
+          "album_name": "Autumn Vibes 2022",
+          "duration_ms": "256760"
+        },
+        {
+          "track_id": "1QzFhzIOW7CyRJLpmq5CM0",
+          "artists": "OneRepublic",
+          "track_name": "Counting Stars",
+          "album_name": "Native",
+          "duration_ms": "257386"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "VqoyKzgkqR4",
+      "title": "Ghost - Square Hammer (Official Music Video)",
+      "channel": "GhostBCVEVO",
+      "channel_id": "UCU_MfrF9fw0CUMOrGy7D1mQ",
+      "views": 124457815,
+      "duration_seconds": 240,
+      "published": "2016-09-29T00:00:02-07:00",
+      "collected_at": "2026-09-27T01:10:36.673387+00:00",
+      "group": "metal",
+      "artist_query": "Ghost",
+      "title_query": "Square Hammer",
+      "source_url": "https://www.youtube.com/watch?v=VqoyKzgkqR4",
+      "spotify_candidates": [
+        {
+          "track_id": "3EAdkWngM7RifOu9kSH4cu",
+          "artists": "Ghost",
+          "track_name": "Square Hammer",
+          "album_name": "Halloween Spooky Party 2022",
+          "duration_ms": "239293"
+        },
+        {
+          "track_id": "7JKeRODQpE6XSOkHUYJrc3",
+          "artists": "Ghost",
+          "track_name": "Square Hammer",
+          "album_name": "Halloween 2022",
+          "duration_ms": "239293"
+        },
+        {
+          "track_id": "6vtcxMO8GBs1V0Jscy3DKA",
+          "artists": "Ghost",
+          "track_name": "Square Hammer",
+          "album_name": "Halloween Party 2022",
+          "duration_ms": "239293"
+        },
+        {
+          "track_id": "3aoIw20fhjGMoXoQ38EbMS",
+          "artists": "Ghost",
+          "track_name": "Square Hammer",
+          "album_name": "Halloween Metal Nights",
+          "duration_ms": "239293"
+        },
+        {
+          "track_id": "5TNhjanmvwvmjCz2WYwSAv",
+          "artists": "Ghost",
+          "track_name": "Square Hammer",
+          "album_name": "Meliora (Deluxe Edition)",
+          "duration_ms": "239293"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "QJJYpsA5tv8",
+      "title": "Bring Me The Horizon - Can You Feel My Heart",
+      "channel": "BMTHOfficialVEVO",
+      "channel_id": "UCUmC7gXciukRv73CQRQ5QGQ",
+      "views": 261669646,
+      "duration_seconds": 228,
+      "published": "2013-08-19T00:00:10-07:00",
+      "collected_at": "2026-09-27T01:10:36.721547+00:00",
+      "group": "metal",
+      "artist_query": "Bring Me The Horizon",
+      "title_query": "Can You Feel My Heart",
+      "source_url": "https://www.youtube.com/watch?v=QJJYpsA5tv8",
+      "spotify_candidates": [
+        {
+          "track_id": "0WSa1sucoNRcEeULlZVQXj",
+          "artists": "Bring Me The Horizon",
+          "track_name": "Can You Feel My Heart",
+          "album_name": "Sempiternal (Expanded Edition)",
+          "duration_ms": "228146"
+        },
+        {
+          "track_id": "0bMOyiuk22fAKiwNoYsRYN",
+          "artists": "Bring Me The Horizon;Jeris Johnson",
+          "track_name": "Can You Feel My Heart - Remix",
+          "album_name": "Can You Feel My Heart (Remix)",
+          "duration_ms": "197412"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "WIKqgE4BwAY",
+      "title": "BABYMETAL - ギミチョコ！！- Gimme chocolate!! (OFFICIAL)",
+      "channel": "BABYMETAL",
+      "channel_id": "UC33_tIj4m1_XaqfFcomShvw",
+      "views": 223181671,
+      "duration_seconds": 243,
+      "published": "2014-02-25T18:59:25-08:00",
+      "collected_at": "2026-09-27T01:10:45.225713+00:00",
+      "group": "metal",
+      "artist_query": "BABYMETAL",
+      "title_query": "Gimme Chocolate",
+      "source_url": "https://www.youtube.com/watch?v=WIKqgE4BwAY",
+      "spotify_candidates": [
+        {
+          "track_id": "16D5bGymrzpi9ZlnYXB5ql",
+          "artists": "BABYMETAL",
+          "track_name": "Gimme Chocolate!!",
+          "album_name": "BABYMETAL",
+          "duration_ms": "230613"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "5abamRO41fE",
+      "title": "Slipknot - Psychosocial [OFFICIAL VIDEO] [HD]",
+      "channel": "Slipknot",
+      "channel_id": "UCOJZ1tna8yj8mAEITPkHNCQ",
+      "views": 669588148,
+      "duration_seconds": 302,
+      "published": "2009-10-29T14:25:38-07:00",
+      "collected_at": "2026-09-27T01:10:36.932499+00:00",
+      "group": "metal",
+      "artist_query": "Slipknot",
+      "title_query": "Psychosocial",
+      "source_url": "https://www.youtube.com/watch?v=5abamRO41fE",
+      "spotify_candidates": [
+        {
+          "track_id": "3RAFcUBrCNaboRXoP3S5t1",
+          "artists": "Slipknot",
+          "track_name": "Psychosocial",
+          "album_name": "All Hope Is Gone (10th Anniversary)",
+          "duration_ms": "284120"
+        },
+        {
+          "track_id": "2MvIMgtWyK88OiPi0J8Dg3",
+          "artists": "Slipknot",
+          "track_name": "Psychosocial",
+          "album_name": "All Hope Is Gone",
+          "duration_ms": "283400"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "W3q8Od5qJio",
+      "title": "Rammstein - Du Hast (Official 4K Video)",
+      "channel": "Rammstein Official",
+      "channel_id": "UCYp3rk70ACGXQ4gFAiMr1SQ",
+      "views": 725445806,
+      "duration_seconds": 235,
+      "published": "2015-07-31T07:37:12-07:00",
+      "collected_at": "2026-09-27T01:10:36.786630+00:00",
+      "group": "metal",
+      "artist_query": "Rammstein",
+      "title_query": "Du Hast",
+      "source_url": "https://www.youtube.com/watch?v=W3q8Od5qJio",
+      "spotify_candidates": [
+        {
+          "track_id": "5awDvzxWfd53SSrsRZ8pXO",
+          "artists": "Rammstein",
+          "track_name": "Du hast",
+          "album_name": "Sehnsucht",
+          "duration_ms": "234226"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "u9Dg-g7t2l4",
+      "title": "Disturbed  - The Sound Of Silence (Official Music Video) [4K UPGRADE]",
+      "channel": "Disturbed",
+      "channel_id": "UCveWMJeHgcIUPMnFzd7Vxjg",
+      "views": 1201026865,
+      "duration_seconds": 262,
+      "published": "2015-12-08T07:28:55-08:00",
+      "collected_at": "2026-09-27T01:10:45.536249+00:00",
+      "group": "metal",
+      "artist_query": "Disturbed",
+      "title_query": "The Sound of Silence",
+      "source_url": "https://www.youtube.com/watch?v=u9Dg-g7t2l4",
+      "spotify_candidates": [
+        {
+          "track_id": "6ZvHLqK1T4EVzWx372MHto",
+          "artists": "Disturbed",
+          "track_name": "The Sound of Silence",
+          "album_name": "Immortalized",
+          "duration_ms": "248466"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "n4RjJKxsamQ",
+      "title": "Scorpions - Wind Of Change (Official Music Video)",
+      "channel": "ScorpionsVEVO",
+      "channel_id": "UCqfmagAXUrUTHpJldTPRseg",
+      "views": 1247922504,
+      "duration_seconds": 283,
+      "published": "2009-11-01T01:42:41-08:00",
+      "collected_at": "2026-09-27T01:10:45.401249+00:00",
+      "group": "metal",
+      "artist_query": "Scorpions",
+      "title_query": "Wind of Change",
+      "source_url": "https://www.youtube.com/watch?v=n4RjJKxsamQ",
+      "spotify_candidates": [
+        {
+          "track_id": "2aX1zws7bVjTLbS1cYZK2W",
+          "artists": "Scorpions",
+          "track_name": "Wind Of Change",
+          "album_name": "Fishing Music",
+          "duration_ms": "311240"
+        },
+        {
+          "track_id": "69DkySvtBDM4Czz2lHx6gw",
+          "artists": "Scorpions",
+          "track_name": "Wind Of Change",
+          "album_name": "Artsy & Colourful",
+          "duration_ms": "311240"
+        },
+        {
+          "track_id": "3ovjw5HZZv43SxTwApooCM",
+          "artists": "Scorpions",
+          "track_name": "Wind Of Change",
+          "album_name": "Crazy World",
+          "duration_ms": "312360"
+        },
+        {
+          "track_id": "5WSsTyBvMEFG3ac6JKb9gY",
+          "artists": "Scorpions",
+          "track_name": "Wind of Change",
+          "album_name": "Comeblack",
+          "duration_ms": "308866"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "CSvFpBOe8eY",
+      "title": "System Of A Down - Chop Suey! (Official HD Video)",
+      "channel": "systemofadownVEVO",
+      "channel_id": "UCvtZDkeFxMkRTNqfqXtxxkw",
+      "views": 1616087036,
+      "duration_seconds": 209,
+      "published": "2009-10-02T21:45:02-07:00",
+      "collected_at": "2026-09-27T01:10:36.993262+00:00",
+      "group": "metal",
+      "artist_query": "System Of A Down",
+      "title_query": "Chop Suey",
+      "source_url": "https://www.youtube.com/watch?v=CSvFpBOe8eY",
+      "spotify_candidates": [
+        {
+          "track_id": "2DlHlPMa4M17kufBvI2lEN",
+          "artists": "System Of A Down",
+          "track_name": "Chop Suey!",
+          "album_name": "Toxicity",
+          "duration_ms": "210240"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "tAGnKpE4NCI",
+      "title": "Metallica: Nothing Else Matters (Official Music Video)",
+      "channel": "Metallica",
+      "channel_id": "UCbulh9WdLtEXiooRcYK7SWw",
+      "views": 1688407852,
+      "duration_seconds": 386,
+      "published": "2009-10-26T18:57:59-07:00",
+      "collected_at": "2026-09-27T01:10:45.359153+00:00",
+      "group": "metal",
+      "artist_query": "Metallica",
+      "title_query": "Nothing Else Matters",
+      "source_url": "https://www.youtube.com/watch?v=tAGnKpE4NCI",
+      "spotify_candidates": [
+        {
+          "track_id": "0nLiqZ6A27jJri2VCalIUs",
+          "artists": "Metallica",
+          "track_name": "Nothing Else Matters",
+          "album_name": "Metallica",
+          "duration_ms": "388266"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "kXYiU_JCYtU",
+      "title": "Numb (Official Music Video) [4K UPGRADE] – Linkin Park",
+      "channel": "Linkin Park",
+      "channel_id": "UCZU9T1ceaOgwfLRq7OKFU4Q",
+      "views": 2798781276,
+      "duration_seconds": 187,
+      "published": "2007-03-05T00:12:00-08:00",
+      "collected_at": "2026-09-27T01:10:45.361783+00:00",
+      "group": "metal",
+      "artist_query": "Linkin Park",
+      "title_query": "Numb",
+      "source_url": "https://www.youtube.com/watch?v=kXYiU_JCYtU",
+      "spotify_candidates": [
+        {
+          "track_id": "2nLtzopw4rPReszdYBJU6h",
+          "artists": "Linkin Park",
+          "track_name": "Numb",
+          "album_name": "Meteora",
+          "duration_ms": "185586"
+        },
+        {
+          "track_id": "1y1sChqjzdNWzwdHQADMrR",
+          "artists": "Linkin Park",
+          "track_name": "Numb",
+          "album_name": "Meteora (Bonus Edition)",
+          "duration_ms": "185586"
+        },
+        {
+          "track_id": "5Zhypo8wFaeZtBQTBVT9fs",
+          "artists": "Linkin Park;JAY-Z",
+          "track_name": "Numb - Live at Live 8, Benjamin Franklin Parkway, Philadelphia, 2nd July 2005",
+          "album_name": "Live 8 (Live, July 2005)",
+          "duration_ms": "246741"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "p29JUpsOSTE",
+      "title": "Chopin - Nocturne in E Flat Major (Op. 9 No. 2)",
+      "channel": "Rousseau",
+      "channel_id": "UCPZUQqtVDmcjm4NY5FkzqLA",
+      "views": 41908143,
+      "duration_seconds": 296,
+      "published": "2018-04-16T06:00:03-07:00",
+      "collected_at": "2026-09-27T01:10:51.751685+00:00",
+      "group": "classical",
+      "artist_query": "Rousseau",
+      "title_query": "Nocturne",
+      "source_url": "https://www.youtube.com/watch?v=p29JUpsOSTE",
+      "spotify_candidates": [],
+      "match_status": "not_found_by_artist_title"
+    },
+    {
+      "youtube_id": "BV7RkEL6oRc",
+      "title": "Beethoven - Moonlight Sonata (3rd Movement)",
+      "channel": "Rousseau",
+      "channel_id": "UCPZUQqtVDmcjm4NY5FkzqLA",
+      "views": 53814917,
+      "duration_seconds": 455,
+      "published": "2018-10-01T06:00:00-07:00",
+      "collected_at": "2026-09-27T01:10:51.586627+00:00",
+      "group": "classical",
+      "artist_query": "Rousseau",
+      "title_query": "Moonlight",
+      "source_url": "https://www.youtube.com/watch?v=BV7RkEL6oRc",
+      "spotify_candidates": [],
+      "match_status": "not_found_by_artist_title"
+    },
+    {
+      "youtube_id": "wfF0zHeU3Zs",
+      "title": "Beethoven - Für Elise",
+      "channel": "Rousseau",
+      "channel_id": "UCPZUQqtVDmcjm4NY5FkzqLA",
+      "views": 98773512,
+      "duration_seconds": 175,
+      "published": "2018-05-21T06:00:09-07:00",
+      "collected_at": "2026-09-27T01:10:51.706981+00:00",
+      "group": "classical",
+      "artist_query": "Rousseau",
+      "title_query": "Fur Elise",
+      "source_url": "https://www.youtube.com/watch?v=wfF0zHeU3Zs",
+      "spotify_candidates": [],
+      "match_status": "not_found_by_artist_title"
+    },
+    {
+      "youtube_id": "WNcsUNKlAKw",
+      "title": "Debussy - Clair de Lune",
+      "channel": "Rousseau",
+      "channel_id": "UCPZUQqtVDmcjm4NY5FkzqLA",
+      "views": 70140466,
+      "duration_seconds": 314,
+      "published": "2018-05-14T06:00:07-07:00",
+      "collected_at": "2026-09-27T01:10:51.493029+00:00",
+      "group": "classical",
+      "artist_query": "Rousseau",
+      "title_query": "Clair de Lune",
+      "source_url": "https://www.youtube.com/watch?v=WNcsUNKlAKw",
+      "spotify_candidates": [],
+      "match_status": "not_found_by_artist_title"
+    },
+    {
+      "youtube_id": "ZPdk5GaIDjo",
+      "title": "Vivaldi Four Seasons: Winter (L'Inverno), original version. Freivogel & Voices of Music  RV 297 4K",
+      "channel": "Voices of Music",
+      "channel_id": "UC9qItJ2Gs8Xfu6y_ERKNsxw",
+      "views": 86986270,
+      "duration_seconds": 567,
+      "published": "2016-04-09T19:03:50-07:00",
+      "collected_at": "2026-09-27T01:10:51.477938+00:00",
+      "group": "classical",
+      "artist_query": "Voices of Music",
+      "title_query": "Winter",
+      "source_url": "https://www.youtube.com/watch?v=ZPdk5GaIDjo",
+      "spotify_candidates": [],
+      "match_status": "not_found_by_artist_title"
+    },
+    {
+      "youtube_id": "fd16sNr9T2Q",
+      "title": "André Rieu - The Second Waltz (official video 2020)",
+      "channel": "André Rieu",
+      "channel_id": "UCAaX9NjMCos_Qwz3n41eUgg",
+      "views": 71689208,
+      "duration_seconds": 245,
+      "published": "2020-05-12T10:00:29-07:00",
+      "collected_at": "2026-09-27T01:10:56.984123+00:00",
+      "group": "classical",
+      "artist_query": "Andre Rieu",
+      "title_query": "Waltz",
+      "source_url": "https://www.youtube.com/watch?v=fd16sNr9T2Q",
+      "spotify_candidates": [
+        {
+          "track_id": "4U5KYGvHlGbeUUNL6ADWjd",
+          "artists": "André Rieu;Johann Strauss Orchestra",
+          "track_name": "The Second Waltz, Op. 99a",
+          "album_name": "100 Greatest Moments",
+          "duration_ms": "221706"
+        },
+        {
+          "track_id": "11f4RmQX2MF0Db4yc2xRwF",
+          "artists": "André Rieu;Johann Strauss Orchestra",
+          "track_name": "Second Waltz - From \"Jazz Suite Nr. 2\" / Live",
+          "album_name": "Viva Olympia (Live)",
+          "duration_ms": "227360"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "vauo4o-ExoY",
+      "title": "André Rieu - The Second Waltz (Shostakovich)",
+      "channel": "André Rieu",
+      "channel_id": "UCAaX9NjMCos_Qwz3n41eUgg",
+      "views": 89452373,
+      "duration_seconds": 249,
+      "published": "2012-05-28T14:53:20-07:00",
+      "collected_at": "2026-09-27T01:10:57.013980+00:00",
+      "group": "classical",
+      "artist_query": "Andre Rieu",
+      "title_query": "Waltz",
+      "source_url": "https://www.youtube.com/watch?v=vauo4o-ExoY",
+      "spotify_candidates": [
+        {
+          "track_id": "4U5KYGvHlGbeUUNL6ADWjd",
+          "artists": "André Rieu;Johann Strauss Orchestra",
+          "track_name": "The Second Waltz, Op. 99a",
+          "album_name": "100 Greatest Moments",
+          "duration_ms": "221706"
+        },
+        {
+          "track_id": "11f4RmQX2MF0Db4yc2xRwF",
+          "artists": "André Rieu;Johann Strauss Orchestra",
+          "track_name": "Second Waltz - From \"Jazz Suite Nr. 2\" / Live",
+          "album_name": "Viva Olympia (Live)",
+          "duration_ms": "227360"
+        }
+      ],
+      "match_status": "candidate_not_confirmed"
+    },
+    {
+      "youtube_id": "kn1gcjuhlhg",
+      "title": "HAUSER - Adagio (Albinoni)",
+      "channel": "HAUSER",
+      "channel_id": "UC09GemGjss3hPdljwtJ8TPA",
+      "views": 119551753,
+      "duration_seconds": 416,
+      "published": "2017-11-20T05:15:39-08:00",
+      "collected_at": "2026-09-27T01:10:57.123059+00:00",
+      "group": "classical",
+      "artist_query": "HAUSER",
+      "title_query": "Adagio",
+      "source_url": "https://www.youtube.com/watch?v=kn1gcjuhlhg",
+      "spotify_candidates": [],
+      "match_status": "not_found_by_artist_title"
+    },
+    {
+      "youtube_id": "gr6QnFmCXzk",
+      "title": "HAUSER - Albinoni Adagio",
+      "channel": "HAUSER",
+      "channel_id": "UC09GemGjss3hPdljwtJ8TPA",
+      "views": 11477950,
+      "duration_seconds": 409,
+      "published": "2019-02-22T11:35:26-08:00",
+      "collected_at": "2026-09-27T01:10:57.187069+00:00",
+      "group": "classical",
+      "artist_query": "HAUSER",
+      "title_query": "Adagio",
+      "source_url": "https://www.youtube.com/watch?v=gr6QnFmCXzk",
+      "spotify_candidates": [],
+      "match_status": "not_found_by_artist_title"
+    },
+    {
+      "youtube_id": "zucBfXpCA6s",
+      "title": "Beethoven \"Moonlight\" Sonata,  III \"Presto Agitato\" Valentina Lisitsa",
+      "channel": "Valentina Lisitsa QOR Records Official channel",
+      "channel_id": "UC6UbiyGEGkF5iuqKRsShCOg",
+      "views": 69220753,
+      "duration_seconds": 407,
+      "published": "2010-01-19T01:12:44-08:00",
+      "collected_at": "2026-09-27T01:10:57.081825+00:00",
+      "group": "classical",
+      "artist_query": "Valentina Lisitsa",
+      "title_query": "Moonlight",
+      "source_url": "https://www.youtube.com/watch?v=zucBfXpCA6s",
+      "spotify_candidates": [],
+      "match_status": "not_found_by_artist_title"
+    }
+  ]
+}
