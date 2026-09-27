@@ -1,4 +1,20 @@
 window.emotifySummary = {
+  "example": {
+    "csv_line": 6,
+    "track_id": "1",
+    "genre": "classical",
+    "emotions": {
+      "amazement": 0,
+      "solemnity": 0,
+      "tenderness": 0,
+      "nostalgia": 1,
+      "calmness": 1,
+      "power": 0,
+      "joyful_activation": 0,
+      "tension": 0,
+      "sadness": 0
+    }
+  },
   "annotations": 8407,
   "excerpts": 400,
   "genres": {

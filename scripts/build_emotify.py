@@ -44,7 +44,18 @@ def main():
         disliked += row["disliked"] == "1"
         both += row["liked"] == row["disliked"] == "1"
         over_three += sum(value == "1" for value in values) > 3
+    # Exemplo real: primeira avaliação que marcou apenas nostalgia e tranquilidade.
+    example_index, example = next(
+        (i, row) for i, row in enumerate(rows, start=2)
+        if {name for name in EMOTIONS if row[name] == "1"} == {"nostalgia", "calmness"}
+    )
     summary = {
+        "example": {
+            "csv_line": example_index,
+            "track_id": example["track id"],
+            "genre": example["genre"],
+            "emotions": {name: int(example[name]) for name in EMOTIONS},
+        },
         "annotations": len(rows),
         "excerpts": len(track_ids),
         "genres": dict(sorted(genre_counts.items())),

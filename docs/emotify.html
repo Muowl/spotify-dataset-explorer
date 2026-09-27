@@ -42,6 +42,22 @@
   code { background:#eee; border-radius:3px; padding:.08rem .25rem; }
   footer { text-align:center; color:var(--muted); padding:1.5rem; font-size:.85rem; }
   @media(max-width:620px) { main { padding:1rem; } .card { padding:1rem; } .flow { grid-template-columns:1fr; } .bar-row { grid-template-columns:105px 1fr 65px; gap:.4rem; font-size:.8rem; } }
+  .emotion-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:.7rem; margin:1rem 0; }
+  .emotion-item { padding:.8rem; border:1px solid var(--line); border-radius:6px; }
+  .emotion-item strong,.emotion-item span { display:block; }
+  .emotion-item span { font-size:.9rem; color:var(--muted); }
+  .comparison { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; }
+  .comparison > div { padding:1rem; background:#f3f5f4; border-radius:6px; }
+  .example-chips { display:flex; flex-wrap:wrap; gap:.5rem; margin:1rem 0; }
+  .chip { border:1px solid #bbb; padding:.35rem .65rem; border-radius:5px; }
+  .chip.selected { background:#e4f5e9; border-color:#087b35; font-weight:600; }
+  details { margin:1rem 0; border-top:1px solid var(--line); padding-top:.8rem; }
+  summary { cursor:pointer; font-weight:600; }
+  summary:focus-visible { outline:3px solid #1454a1; outline-offset:3px; }
+  .bar-row { grid-template-columns:minmax(110px,180px) 1fr 150px; }
+  .chart-axis { display:grid; grid-template-columns:minmax(110px,180px) 1fr 150px; gap:.7rem; font-size:.8rem; color:var(--muted); }
+  .chart-axis span { display:flex; justify-content:space-between; }
+  @media(max-width:620px) { .bar-row,.chart-axis { grid-template-columns:100px 1fr 100px; gap:.4rem; font-size:.8rem; } }
 </style>
 </head>
 <body>
@@ -63,7 +79,37 @@
       <div><strong>Escolha</strong><span>Música escolhida e preferência naquele momento.</span></div>
       <div><strong>Depois</strong><span>Emoção sentida ao ouvir a música.</span></div>
     </div>
-    <p>A <strong>Geneva Emotional Music Scale (GEMS)</strong> foi criada para caracterizar emoções <strong>evocadas pela música</strong>. Suas nove dimensões incluem nostalgia, tranquilidade, tensão e tristeza. Ela não mede, por si só, a preferência musical nem substitui uma medida do estado emocional anterior à escolha.</p>
+  </section>
+
+  <section class="card" aria-labelledby="gems">
+    <h2 id="gems">Como medir o que sentimos ao ouvir música?</h2>
+    <p>A <strong>Geneva Emotional Music Scale (GEMS)</strong> foi desenvolvida para medir emoções evocadas pela música. A pessoa relata o que sentiu durante a escuta. O modelo organiza essa experiência em nove dimensões.</p>
+    <div class="emotion-grid">
+      <div class="emotion-item"><strong>Admiração · Wonder</strong><span>Encantamento e maravilhamento.</span></div>
+      <div class="emotion-item"><strong>Transcendência · Transcendence</strong><span>Inspiração e sensação de elevação.</span></div>
+      <div class="emotion-item"><strong>Ternura · Tenderness</strong><span>Afeto, carinho e delicadeza.</span></div>
+      <div class="emotion-item"><strong>Nostalgia · Nostalgia</strong><span>Saudade e sentimentos ligados a lembranças.</span></div>
+      <div class="emotion-item"><strong>Tranquilidade · Peacefulness</strong><span>Serenidade e relaxamento.</span></div>
+      <div class="emotion-item"><strong>Poder · Power</strong><span>Sensação de força e energia.</span></div>
+      <div class="emotion-item"><strong>Ativação alegre · Joyful activation</strong><span>Animação e vontade de dançar.</span></div>
+      <div class="emotion-item"><strong>Tensão · Tension</strong><span>Nervosismo e agitação desconfortável.</span></div>
+      <div class="emotion-item"><strong>Tristeza · Sadness</strong><span>Sentimento de tristeza e pesar.</span></div>
+    </div>
+    <p class="note">Traduções e descrições para leitura didática; não constituem uma versão brasileira validada do instrumento.</p>
+    <div class="comparison">
+      <div><h3>GEMS: escala e modelo emocional</h3><p>A GEMS-45 usa vários itens por dimensão. A versão curta GEMS-9 usa um item por dimensão. Aplicá-las exige seguir os itens, as instruções e a escala de resposta da versão escolhida.</p></div>
+      <div><h3>Emotify: aplicação das categorias</h3><p>O jogo adaptou os rótulos e pediu a seleção de até três emoções. No CSV, cada categoria recebe 0 ou 1. Esse procedimento não equivale à aplicação integral da GEMS-9.</p><p class="note">Correspondências de nomes: Wonder → amazement; Transcendence → solemnity; Peacefulness → calmness. Os exemplos e o gráfico usam os rótulos do Emotify.</p></div>
+    </div>
+    <p><strong>Para o TCC:</strong> emoção evocada após ouvir música e estado emocional anterior à escolha precisam ser medidos separadamente.</p>
+  </section>
+
+  <section class="card" aria-labelledby="example">
+    <h2 id="example">Como uma resposta vira dado</h2>
+    <p>No exemplo real abaixo, uma avaliação marcou nostalgia e tranquilidade. A representação visual foi criada para explicar o CSV; não reproduz a interface original do jogo.</p>
+    <p class="note" id="example-source"></p>
+    <div class="example-chips" id="example-chips" aria-label="Categorias marcadas nesta avaliação"></div>
+    <p><strong>1 = marcada; 0 = não marcada.</strong> O zero não prova ausência completa da emoção: a instrução era escolher até três emoções sentidas intensamente.</p>
+    <p>Essa única avaliação acrescenta uma ocorrência à barra de nostalgia e outra à de tranquilidade. Ela continua contando como <strong>uma avaliação</strong> no total da base.</p>
   </section>
 
   <section class="card" aria-labelledby="case">
@@ -76,6 +122,7 @@
       <div class="stat"><strong>9</strong><span>categorias emocionais</span></div>
     </div>
     <p class="note">Unidade da tabela: uma avaliação de um trecho por um ouvinte. O arquivo público não traz um identificador estável de participante; por isso, não podemos contar pessoas distintas diretamente nem acompanhar a mesma pessoa em dias diferentes. A página dos autores informa 1.778 participantes no jogo.</p>
+    <details><summary>Ver os campos do CSV e seus cuidados de leitura</summary>
     <div class="table-wrap">
       <table>
         <thead><tr><th>Campo no CSV</th><th>O que representa</th><th>Cuidados de leitura</th></tr></thead>
@@ -87,21 +134,29 @@
         </tbody>
       </table>
     </div>
+    </details>
   </section>
 
   <section class="card" aria-labelledby="results">
     <h2 id="results">O que aparece nas anotações</h2>
-    <p>Cada barra conta quantas avaliações marcaram uma emoção. Uma avaliação pode entrar em várias barras; estas contagens <strong>não somam 100%</strong> nem medem intensidade. Os gêneros e os trechos receberam quantidades diferentes de respostas.</p>
-    <div id="emotion-chart" role="img" aria-label="Contagem de avaliações que marcaram cada uma das nove emoções"></div>
-    <p class="note" id="quality"></p>
+    <p>Cada barra mostra o percentual de avaliações que marcaram uma emoção, acompanhado da contagem. O denominador é o total de avaliações da base. Os percentuais podem somar mais de 100%, porque uma avaliação pode marcar várias emoções. Eles não medem intensidade emocional.</p>
+    <div class="chart-axis" aria-hidden="true"><div></div><span><b>0%</b><b>50%</b><b>100%</b></span><div>% · avaliações</div></div>
+    <div id="emotion-chart" role="list" aria-label="Percentual e contagem de avaliações por emoção"></div>
+    <p class="note">Leitura descritiva: o gráfico caracteriza estas avaliações. Gêneros e trechos receberam quantidades diferentes de respostas, e os participantes podiam escolher gêneros e pular músicas. Não é uma estimativa das emoções de todos os ouvintes.</p>
+    <details><summary>Ver inconsistências encontradas no arquivo</summary><p class="note" id="quality"></p></details>
   </section>
 
   <section class="card" aria-labelledby="scope">
     <h2 id="scope">O que esta base ajuda a decidir</h2>
     <p>O Emotify mostra uma forma concreta de coletar emoção sentida após a escuta e permite estudar como as respostas foram registradas. Seu humor anterior foi coletado <strong>antes do jogo</strong>, não necessariamente antes de cada trecho. Como não há registro de dia, horário, atividade e identidade longitudinal no CSV público, ele <strong>não testa diretamente</strong> se a preferência da mesma pessoa muda entre dias.</p>
+    <div class="comparison">
+      <div><h3>O que o CSV oferece</h3><p>Emoções marcadas após a escuta, humor antes do jogo e declarações de agrado ou desagrado.</p></div>
+      <div><h3>O que falta para testar o “tem dia”</h3><p>Identificar a mesma pessoa em registros repetidos, medir o estado antes de cada escolha e registrar data, horário, contexto e preferência naquele momento.</p></div>
+    </div>
     <div class="callout"><strong>Questão para a orientação.</strong> Queremos medir a emoção evocada após ouvir uma música, a relação entre estado anterior e escolha musical, ou ambos? A resposta define se faz sentido usar categorias da GEMS, outra medida para estado anterior e uma coleta repetida com participantes.</div>
-    <h3>Fontes e reprodução</h3>
+    <details><summary>Fontes e reprodução da análise</summary>
     <p class="note">Dados e protocolo: <a href="https://www2.projects.science.uu.nl/memotion/emotifydata/">página oficial do Emotify (Universidade de Utrecht)</a>. Artigo da base: Aljanaki, Wiering e Veltkamp, <a href="https://doi.org/10.1016/j.ipm.2015.03.004"><em>Studying emotion induced by music through a crowdsourcing game</em></a>, <em>Information Processing &amp; Management</em>, 2016. Escala original: Zentner, Grandjean e Scherer, <a href="https://doi.org/10.1037/1528-3542.8.4.494"><em>Emotions evoked by the sound of music</em></a>, <em>Emotion</em>, 2008. As contagens desta página são calculadas pelo script <a href="https://github.com/Muowl/spotify-dataset-explorer/blob/main/scripts/build_emotify.py"><code>scripts/build_emotify.py</code></a> a partir do CSV oficial, sem junção com a base Spotify.</p>
+    </details>
   </section>
 </main>
 <footer>Projeto acadêmico de exploração de dados musicais para o TCC de Sistemas de Informação — UFJF · <a href="https://github.com/Muowl/spotify-dataset-explorer">Repositório no GitHub</a></footer>
@@ -114,14 +169,24 @@
     document.getElementById("total").textContent = fmt.format(data.annotations);
     document.getElementById("tracks").textContent = fmt.format(data.excerpts);
     document.getElementById("genres").textContent = Object.keys(data.genres).length;
+    const example = data.example;
+    if (example) {
+      document.getElementById("example-source").textContent = `Registro real: linha ${example.csv_line} do CSV, incluindo o cabeçalho; trecho ${example.track_id}; gênero ${example.genre}. A linha identifica o registro, não a pessoa.`;
+      Object.entries(example.emotions).forEach(([key, selected]) => {
+        const chip = document.createElement("span");
+        chip.className = `chip${selected ? " selected" : ""}`;
+        chip.textContent = `${labels[key]}: ${selected}`;
+        document.getElementById("example-chips").appendChild(chip);
+      });
+    }
     const chart = document.getElementById("emotion-chart");
     Object.entries(data.emotions).sort((a,b) => b[1]-a[1]).forEach(([key,count]) => {
-      const row = document.createElement("div"); row.className = "bar-row";
+      const row = document.createElement("div"); row.className = "bar-row"; row.setAttribute("role", "listitem");
       const label = document.createElement("span"); label.textContent = labels[key];
       const track = document.createElement("span"); track.className = "bar-track";
       const bar = document.createElement("span"); bar.className = "bar"; bar.style.width = `${count/data.annotations*100}%`;
       track.appendChild(bar);
-      const value = document.createElement("strong"); value.textContent = fmt.format(count);
+      const value = document.createElement("strong"); value.textContent = `${(count/data.annotations*100).toLocaleString("pt-BR", {minimumFractionDigits:1, maximumFractionDigits:1})}% · ${fmt.format(count)}`;
       row.append(label,track,value); chart.appendChild(row);
     });
     document.getElementById("quality").textContent = `Verificação do CSV: ${fmt.format(data.over_three)} avaliações marcaram mais de três emoções, embora a instrução do jogo limitasse a escolha a três; ${fmt.format(data.both)} marcaram simultaneamente “gostou” e “não gostou”. Mantivemos essas linhas nas contagens descritivas e não inferimos motivos para as divergências.`;
