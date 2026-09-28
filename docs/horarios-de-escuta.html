@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Estudos sobre horários de escuta musical, limites das evidências e perguntas para o TCC de Sistemas de Informação.">
+<title>Horários de escuta — Música e contexto</title>
+<style>
+  :root { --green:#1db954; --ink:#191414; --muted:#535353; --bg:#f7f7f7; --line:#ddd; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; }
+  header { background:var(--ink); color:#fff; padding:1.8rem max(1.5rem,calc((100% - 1100px)/2)); }
+  header h1 { margin:0 0 .3rem; font-size:1.7rem; }
+  header p { margin:0; color:#ddd; }
+  nav { background:#252525; padding:.7rem max(1.5rem,calc((100% - 1100px)/2)); display:flex; gap:.65rem; flex-wrap:wrap; }
+  nav a { color:#fff; text-decoration:none; padding:.45rem .8rem; border-radius:6px; }
+  nav a:hover, nav a:focus-visible, nav a[aria-current="page"] { background:var(--green); color:#111; }
+  main { max-width:1100px; margin:auto; padding:1.5rem; }
+  .card { background:#fff; border-radius:10px; padding:1.25rem 1.4rem; margin-bottom:1.4rem; box-shadow:0 1px 3px #0001; }
+  h2 { margin:0 0 .75rem; font-size:1.25rem; border-bottom:2px solid var(--green); padding-bottom:.3rem; display:inline-block; }
+  h3 { font-size:1.04rem; margin:1rem 0 .35rem; }
+  p { margin:.5rem 0 .85rem; }
+  a { color:#087b35; }
+  a:focus-visible { outline:3px solid #1454a1; outline-offset:2px; }
+  .lead { font-size:1.08rem; max-width:78ch; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:.8rem; margin:1rem 0; }
+  .stat { border-left:4px solid var(--green); border-radius:5px; background:#eff9f2; padding:.7rem 1rem; }
+  .stat strong { display:block; font-size:1.4rem; }
+  .stat span,.note { color:var(--muted); font-size:.9rem; }
+  .callout { border-left:4px solid var(--ink); background:#f3f5f4; padding:.8rem 1rem; margin:1rem 0; }
+  .flow { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.8rem; margin:1rem 0; }
+  .flow div { background:#f0faf3; padding:.8rem; border-radius:6px; border-top:3px solid var(--green); }
+  .flow strong { display:block; }
+  .flow span { font-size:.9rem; }
+  .bar-row { display:grid; grid-template-columns:minmax(130px,190px) 1fr 90px; gap:.7rem; align-items:center; margin:.55rem 0; font-size:.93rem; }
+  .bar-track { background:#e9efeb; border-radius:4px; height:20px; overflow:hidden; }
+  .bar { display:block; background:#159447; height:100%; border-radius:4px; }
+  .bar-row strong { text-align:right; font-variant-numeric:tabular-nums; }
+  .table-wrap { overflow-x:auto; }
+  table { width:100%; min-width:560px; border-collapse:collapse; font-size:.94rem; }
+  th,td { text-align:left; padding:.6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:#eff9f2; }
+  code { background:#eee; border-radius:3px; padding:.08rem .25rem; }
+  footer { text-align:center; color:var(--muted); padding:1.5rem; font-size:.85rem; }
+  @media(max-width:620px) { main { padding:1rem; } .card { padding:1rem; } .flow { grid-template-columns:1fr; } .bar-row { grid-template-columns:105px 1fr 65px; gap:.4rem; font-size:.8rem; } }
+  .emotion-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:.7rem; margin:1rem 0; }
+  .emotion-item { padding:.8rem; border:1px solid var(--line); border-radius:6px; }
+  .emotion-item strong,.emotion-item span { display:block; }
+  .emotion-item span { font-size:.9rem; color:var(--muted); }
+  .comparison { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; }
+  .comparison > div { padding:1rem; background:#f3f5f4; border-radius:6px; }
+  .example-chips { display:flex; flex-wrap:wrap; gap:.5rem; margin:1rem 0; }
+  .chip { border:1px solid #bbb; padding:.35rem .65rem; border-radius:5px; }
+  .chip.selected { background:#e4f5e9; border-color:#087b35; font-weight:600; }
+  details { margin:1rem 0; border-top:1px solid var(--line); padding-top:.8rem; }
+  summary { cursor:pointer; font-weight:600; }
+  summary:focus-visible { outline:3px solid #1454a1; outline-offset:3px; }
+  .bar-row { grid-template-columns:minmax(110px,180px) 1fr 150px; }
+  .chart-axis { display:grid; grid-template-columns:minmax(110px,180px) 1fr 150px; gap:.7rem; font-size:.8rem; color:var(--muted); }
+  .chart-axis span { display:flex; justify-content:space-between; }
+  @media(max-width:620px) { .bar-row,.chart-axis { grid-template-columns:100px 1fr 100px; gap:.4rem; font-size:.8rem; } }
+
+  .toc { display:flex; flex-wrap:wrap; gap:.6rem 1.2rem; margin:1rem 0; }
+  .eyebrow { color:var(--muted); font-size:.9rem; }
+  li { margin:.5rem 0; }
+  section { scroll-margin-top:1rem; }
+  @media print { nav,.toc { display:none; } body { background:white; font-size:11pt; } main { padding:0; } .card { box-shadow:none; border:1px solid #ddd; } h2,h3 { break-after:avoid; } tr { break-inside:avoid; } }
+</style>
+</head>
+<body>
+<header><h1>Horários de escuta e preferência musical</h1><p>Evidências da literatura e perguntas iniciais para a orientação do TCC.</p></header>
+<nav aria-label="Navegação principal">
+<a href="index.html">Visão geral da base</a>
+<a href="hits-mundiais.html">Hits e nichos</a>
+<a href="emotify.html">Música e emoção</a>
+<a href="horarios-de-escuta.html" aria-current="page">Horários de escuta</a>
+</nav>
+<main>
+<section class="card" aria-labelledby="pergunta">
+<p class="eyebrow">Levantamento inicial de literatura · 28 de setembro de 2026</p>
+<h2 id="pergunta">Existem horários em que certas músicas ou estilos são mais ouvidos?</h2>
+<p class="lead">Há evidência de associação entre horário e perfil da música ouvida. Os estudos abaixo investigam características sonoras, gêneros e artistas em níveis diferentes: padrões da população e hábitos de determinados ouvintes.</p>
+<div class="callout"><strong>Escopo desta página.</strong> Esta é uma síntese de estudos publicados, não uma análise de horários realizada com o CSV deste site. Não é uma revisão sistemática nem uma definição do tema do TCC.</div>
+<div class="toc" aria-label="Seções da página"><a href="#estudos">Estudos encontrados</a><a href="#limites">Limites da interpretação</a><a href="#base">Relação com nossa base</a><a href="#orientacao">Perguntas para orientação</a><a href="#referencias">Referências</a></div>
+</section>
+<section class="card" aria-labelledby="estudos">
+<h2 id="estudos">O que os estudos encontraram</h2>
+<h3>1. Park et al. (2019) · Características musicais em escala internacional</h3>
+<p>O estudo analisou <strong>765 milhões de reproduções de 1 milhão de pessoas em 51 países</strong>. Encontrou músicas mais energéticas durante o horário comercial, inclusive à tarde, e mais relaxantes tarde da noite. Os padrões diários foram semelhantes entre culturas e grupos demográficos, mas os níveis de intensidade diferiram entre idades, regiões e hábitos de atividade noturna. <a href="#ref-1">[1]</a></p>
+<p class="note">Artigo de periódico revisado por pares. O resultado trata do perfil afetivo da música ouvida; não estabelece horários universais para gêneros específicos.</p>
+<h3>2. Heggli, Stupacher e Vuust (2021) · Cinco blocos temporais</h3>
+<p>A partir de uma base com <strong>mais de 2 bilhões de eventos de streaming do Spotify</strong>, os autores agruparam características de áudio por hora e identificaram cinco blocos recorrentes. Seus limites variavam entre dias úteis e fins de semana. <a href="#ref-2">[2]</a></p>
+<div class="table-wrap"><table>
+<caption>Perfis dos blocos de Heggli et al., em relação à média geral das características (seção 2.1).</caption>
+<thead><tr><th scope="col">Bloco no artigo</th><th scope="col">Perfil observado</th></tr></thead><tbody>
+<tr><th scope="row">Morning · manhã</th><td>Energia, valência e intensidade sonora maiores; andamento menor.</td></tr>
+<tr><th scope="row">Afternoon · tarde</th><td>Aumento do andamento; força da batida e dançabilidade próximas da média.</td></tr>
+<tr><th scope="row">Evening · início da noite</th><td>Maior andamento e picos de força da batida e dançabilidade.</td></tr>
+<tr><th scope="row">Night · período noturno posterior</th><td>Menores valores de andamento e intensidade sonora.</td></tr>
+<tr><th scope="row">Late night / early morning · madrugada</th><td>Perfil semelhante ao bloco anterior, com aumento de energia e valência em relação a ele.</td></tr>
+</tbody></table></div>
+<p class="note">Artigo de periódico revisado por pares. Os nomes são rótulos dos agrupamentos, não faixas horárias fixas para aplicação no Brasil. As diferenças médias eram pequenas em termos perceptivos. A base principal não continha identificação individual longitudinal nem dados demográficos.</p>
+<h3>3. Herrera, Resa e Sordo (2010) · Gêneros e artistas por ouvinte</h3>
+<p>O trabalho partiu de cerca de <strong>19 milhões de registros de 992 usuários do Last.fm</strong>. Após filtragem, identificou padrões de horário e dia da semana para certos artistas e gêneros de determinados ouvintes, com validação em um período posterior. Isso sugere regularidades individuais, não que um gênero tenha o mesmo horário preferido para todos. <a href="#ref-3">[3]</a></p>
+<p class="note">Estudo exploratório publicado nos anais do WOMRAD 2010. A filtragem forte restringe a generalização. A publicação foi verificada; o procedimento específico de revisão por pares deste artigo não foi confirmado neste levantamento. Referência complementar, não fundamento principal.</p>
+</section>
+<section class="card" aria-labelledby="limites">
+<h2 id="limites">O que ainda não podemos concluir</h2>
+<div class="comparison">
+<div><h3>Escuta não equivale a preferência declarada</h3><p>Uma reprodução registra comportamento. Para tratá-la como preferência, é necessário justificar essa medida e considerar reprodução automática, músicas puladas e contexto da sessão.</p></div>
+<div><h3>Associação não identifica a causa</h3><p>Horário, trabalho, estudo, exercício e sono podem variar juntos. A associação temporal, sozinha, não demonstra que o relógio ou o estado emocional causou a escolha.</p></div>
+<div><h3>Média coletiva não descreve cada pessoa</h3><p>Um perfil agregado pode mudar porque pessoas diferentes escutam em horários diferentes. Investigar mudança na mesma pessoa exige registros repetidos por ouvinte.</p></div>
+<div><h3>Características não são gêneros</h3><p>Energia e andamento descrevem aspectos da música. Não permitem concluir diretamente que rock, samba ou música clássica predominam em determinado horário.</p></div>
+</div>
+<p class="note">Cuidados metodológicos desta síntese. As fontes verificadas não sustentam uma tabela universal de gêneros por hora nem um “horário ideal” para cada faixa.</p>
+</section>
+<section class="card" aria-labelledby="base">
+<h2 id="base">O que isso significa para a base deste site</h2>
+<p>O Spotify Tracks Dataset usado no visualizador descreve faixas: inclui gênero, popularidade e características de áudio. <strong>Não contém eventos de escuta com usuário, data e horário.</strong> Portanto, permite explorar o perfil musical das faixas, mas não verificar quando foram ouvidas nem como a escolha de uma pessoa muda ao longo do dia.</p>
+<p>O Music Streaming Sessions Dataset do estudo de 2021 é outra base. Compartilhar a origem Spotify não torna os conjuntos equivalentes.</p>
+<div class="callout"><strong>Requisito para uma investigação futura.</strong> Para estudar variação dentro da mesma pessoa, precisamos de identificação pseudonimizada do ouvinte, faixa, data e horário local em registros repetidos. Para investigar emoção ou atividade como explicação, também precisamos medir essas variáveis. A disponibilidade de uma base adequada ainda deve ser verificada.</div>
+<p class="note">Documentação local: <a href="https://github.com/Muowl/spotify-dataset-explorer/blob/main/data/README.md">campos e origem da base</a>. A página <a href="emotify.html">Música e emoção</a> discute outra distinção necessária: estado anterior à escolha versus emoção sentida após a escuta.</p>
+</section>
+<section class="card" aria-labelledby="orientacao">
+<h2 id="orientacao">Perguntas para conversar com o orientador</h2>
+<p>As questões abaixo são possibilidades de investigação, ainda sem decisão de escopo:</p>
+<ol>
+<li><strong>Qual é o fenômeno?</strong> Variação por horário dentro do dia, entre dias da semana ou conforme o estado emocional? Esses recortes não são equivalentes.</li>
+<li><strong>Qual é a unidade de análise?</strong> Queremos descrever a população ou verificar mudanças na mesma pessoa?</li>
+<li><strong>O que representa a escolha musical?</strong> Características de áudio, gêneros, artistas ou faixas específicas?</li>
+<li><strong>Quais dados permitem responder?</strong> Um histórico de escuta basta para a pergunta escolhida ou será necessário coletar contexto e preferência declarada?</li>
+<li><strong>Onde estaria a contribuição?</strong> Uma replicação delimitada, uma análise de diferenças individuais ou uma avaliação de recomendação contextual? Construir um recomendador não é necessário para começar.</li>
+</ol>
+<p><strong>Possível pergunta inicial, para discussão:</strong> “As características das músicas ouvidas por uma mesma pessoa variam de forma recorrente conforme o horário do dia?”</p>
+<p class="note">Essa formulação investiga associação temporal. Não afirma que a variação existe em todos os ouvintes nem que é causada por emoções. O fenômeno geral já aparece na literatura; a contribuição do TCC precisa ser delimitada além de apenas constatar sua existência.</p>
+</section>
+<section class="card" aria-labelledby="referencias">
+<h2 id="referencias">Referências e rastreabilidade</h2>
+<p id="ref-1">[1] Park, M.; Thom, J.; Mennicken, S.; Cramer, H.; Macy, M. (2019). <cite>Global music streaming data reveal diurnal and seasonal patterns of affective preference.</cite> Nature Human Behaviour, 3, 230–236. <a href="https://doi.org/10.1038/s41562-018-0508-z">DOI: 10.1038/s41562-018-0508-z</a>. Síntese baseada no resumo publicado.</p>
+<p id="ref-2">[2] Heggli, O. A.; Stupacher, J.; Vuust, P. (2021). <cite>Diurnal fluctuations in musical preference.</cite> Royal Society Open Science, 8(11), 210885. <a href="https://doi.org/10.1098/rsos.210885">DOI: 10.1098/rsos.210885</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8580447/">Texto completo</a>. Ver introdução e seção 2.1 para base e perfis temporais.</p>
+<p id="ref-3">[3] Herrera, P.; Resa, Z.; Sordo, M. (2010). <cite>Rocking around the clock eight days a week: an exploration of temporal patterns of music listening.</cite> Workshop on Music Recommendation and Discovery (WOMRAD), realizado junto ao ACM RecSys. <a href="https://ceur-ws.org/Vol-633/wom2010_paper1.pdf">Texto completo</a> · <a href="https://ceur-ws.org/Vol-633/">Anais</a>. Ver seções 3 e 4 para filtragem e validação.</p>
+<p class="note">Levantamento direcionado, sem protocolo exaustivo de busca. As interpretações e perguntas desta página são uma síntese para orientação, não conclusões de um experimento do TCC. Nenhum dado novo de escuta foi coletado ou analisado.</p>
+</section>
+</main>
+<footer>Projeto acadêmico de exploração de dados musicais para o TCC de Sistemas de Informação — UFJF · <a href="https://github.com/Muowl/spotify-dataset-explorer">Repositório no GitHub</a></footer>
+</body>
+</html>

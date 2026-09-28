@@ -14,10 +14,13 @@ https://muowl.github.io/spotify-dataset-explorer/
 
 Não precisa instalar nada nem rodar código.
 
+A página `docs/horarios-de-escuta.html` reúne literatura sobre horários de escuta, limitações e perguntas para orientação. É uma síntese bibliográfica, não uma análise temporal do CSV de faixas.
+
 ## Estrutura
 
 - `docs/index.html` - visualização estática com os gráficos
 - `docs/hits-mundiais.html` - 30 vídeos em três seleções (global, metal e clássica), com visualizações e atributos do CSV
+- `docs/horarios-de-escuta.html` - estudos sobre padrões temporais de escuta e questões para o TCC
 - `docs/emotify.html` - introdução à GEMS e exploração das anotações do Emotify
 - `docs/assets/emotify-data.js` - contagens reproduzíveis exibidas na página de música e emoção
 - `scripts/build_emotify.py` - processa o CSV oficial do Emotify sem dependências externas
