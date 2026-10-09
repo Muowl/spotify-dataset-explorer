@@ -71,18 +71,8 @@
   <a href="emotify.html" aria-current="page">Música e emoção</a>
 <a href="horarios-de-escuta.html">Horários de escuta</a></nav>
 <main>
-  <section class="card" aria-labelledby="question">
-    <h2 id="question">A pergunta para o TCC</h2>
-    <p class="lead">O “tem dia” sugere que uma pessoa pode preferir músicas diferentes conforme seu estado emocional e o contexto do momento. Para investigar isso, precisamos distinguir <strong>como ela estava antes da escolha</strong>, <strong>o que quis ouvir</strong> e <strong>o que sentiu após ouvir</strong>.</p>
-    <div class="flow" aria-label="Etapas distintas de uma possível coleta">
-      <div><strong>Antes</strong><span>Estado emocional e contexto do momento.</span></div>
-      <div><strong>Escolha</strong><span>Música escolhida e preferência naquele momento.</span></div>
-      <div><strong>Depois</strong><span>Emoção sentida ao ouvir a música.</span></div>
-    </div>
-  </section>
-
   <section class="card" aria-labelledby="gems">
-    <h2 id="gems">Como medir o que sentimos ao ouvir música?</h2>
+    <h2 id="gems">Geneva Emotional Music Scale (GEMS)</h2>
     <p>A <strong>Geneva Emotional Music Scale (GEMS)</strong> foi desenvolvida para medir emoções evocadas pela música. A pessoa relata o que sentiu durante a escuta. O modelo organiza essa experiência em nove dimensões.</p>
     <aside class="callout" aria-labelledby="gems-source">
       <h3 id="gems-source">Artigo original da GEMS</h3>
@@ -103,10 +93,10 @@
     </div>
     <p class="note">Traduções e descrições para leitura didática; não constituem uma versão brasileira validada do instrumento.</p>
     <div class="comparison">
-      <div><h3>GEMS: escala e modelo emocional</h3><p>A GEMS-45 usa vários itens por dimensão. A versão curta GEMS-9 usa um item por dimensão. Aplicá-las exige seguir os itens, as instruções e a escala de resposta da versão escolhida.</p></div>
+      <div><h3>GEMS: escala e modelo emocional</h3><p>A GEMS-45 usa vários itens por dimensão. A versão curta GEMS-9 usa um item por dimensão. Cada versão define seus próprios itens, instruções e escala de resposta.</p></div>
       <div><h3>Emotify: aplicação das categorias</h3><p>O jogo adaptou os rótulos e pediu a seleção de até três emoções. No CSV, cada categoria recebe 0 ou 1. Esse procedimento não equivale à aplicação integral da GEMS-9.</p><p class="note">Correspondências de nomes: Wonder → amazement; Transcendence → solemnity; Peacefulness → calmness. Os exemplos e o gráfico usam os rótulos do Emotify.</p></div>
     </div>
-    <p><strong>Para o TCC:</strong> emoção evocada após ouvir música e estado emocional anterior à escolha precisam ser medidos separadamente.</p>
+    <p>Emoção evocada durante a escuta e estado emocional anterior à escolha são variáveis distintas.</p>
   </section>
 
   <section class="card" aria-labelledby="example">
@@ -153,13 +143,12 @@
   </section>
 
   <section class="card" aria-labelledby="scope">
-    <h2 id="scope">O que esta base ajuda a decidir</h2>
-    <p>O Emotify mostra uma forma concreta de coletar emoção sentida após a escuta e permite estudar como as respostas foram registradas. Seu humor anterior foi coletado <strong>antes do jogo</strong>, não necessariamente antes de cada trecho. Como não há registro de dia, horário, atividade e identidade longitudinal no CSV público, ele <strong>não testa diretamente</strong> se a preferência da mesma pessoa muda entre dias.</p>
+    <h2 id="scope">Escopo e limitações da base</h2>
+    <p>O Emotify registra emoções relatadas após a escuta. O humor anterior foi coletado <strong>antes do jogo</strong>, não necessariamente antes de cada trecho. Como o CSV público não registra dia, horário, atividade e identidade longitudinal, ele não permite acompanhar mudanças de preferência da mesma pessoa entre dias.</p>
     <div class="comparison">
-      <div><h3>O que o CSV oferece</h3><p>Emoções marcadas após a escuta, humor antes do jogo e declarações de agrado ou desagrado.</p></div>
-      <div><h3>O que falta para testar o “tem dia”</h3><p>Identificar a mesma pessoa em registros repetidos, medir o estado antes de cada escolha e registrar data, horário, contexto e preferência naquele momento.</p></div>
+      <div><h3>Variáveis registradas</h3><p>Emoções marcadas após a escuta, humor antes do jogo e declarações de agrado ou desagrado.</p></div>
+      <div><h3>Variáveis ausentes</h3><p>Identificador estável de participante, data, horário, atividade e estado emocional imediatamente anterior a cada trecho.</p></div>
     </div>
-    <div class="callout"><strong>Questão para a orientação.</strong> Queremos medir a emoção evocada após ouvir uma música, a relação entre estado anterior e escolha musical, ou ambos? A resposta define se faz sentido usar categorias da GEMS, outra medida para estado anterior e uma coleta repetida com participantes.</div>
     <details><summary>Fontes e reprodução da análise</summary>
     <p class="note">Dados e protocolo: <a href="https://www2.projects.science.uu.nl/memotion/emotifydata/">página oficial do Emotify (Universidade de Utrecht)</a>. Artigo da base: Aljanaki, Wiering e Veltkamp, <a href="https://doi.org/10.1016/j.ipm.2015.03.004"><em>Studying emotion induced by music through a crowdsourcing game</em></a>, <em>Information Processing &amp; Management</em>, 2016. Escala original: Zentner, Grandjean e Scherer, <a href="https://doi.org/10.1037/1528-3542.8.4.494"><em>Emotions evoked by the sound of music</em></a>, <em>Emotion</em>, 2008. As contagens desta página são calculadas pelo script <a href="https://github.com/Muowl/spotify-dataset-explorer/blob/main/scripts/build_emotify.py"><code>scripts/build_emotify.py</code></a> a partir do CSV oficial, sem junção com a base Spotify.</p>
     </details>

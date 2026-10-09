@@ -51,7 +51,7 @@
 <body>
 <header>
   <h1>Spotify Tracks Dataset - Exploração Visual</h1>
-  <p>Apoio para estudar a base usada no TCC (UFJF). Visualização estática, sem precisar executar nada.</p>
+  <p>Características, distribuições e associações entre os atributos do Spotify Tracks Dataset.</p>
 </header>
 <nav aria-label="Navegação principal">
   <a href="index.html" aria-current="page">Visão geral da base</a>
@@ -95,6 +95,8 @@
     <strong>Procedimento de preparação</strong>
     <p>O CSV original possui 114.000 linhas (1.000 por gênero × 114 gêneros). A análise remove a coluna de índice exportada (<code>Unnamed: 0</code>, quando presente) e aplica dois recortes: para análises globais (features, correlação), elimina duplicatas com base em <code>track_id</code>, resultando em 89.741 faixas únicas; para análises por gênero, deduplica o par <code>(track_id, track_genre)</code>, preservando todos os 114 gêneros.</p>
     <p>As análises abaixo são descritivas e exploratórias: procuram caracterizar a base e identificar relações entre atributos, sem interpretar correlação como causalidade.</p>
+    <p><strong>Qualidade dos registros:</strong> no CSV auditado, 720 IDs têm valores diferentes de <code>popularity</code> entre suas ocorrências. O recorte global mantém a primeira ocorrência; o recorte por gênero preserva o valor de cada par faixa–gênero. Sem data de coleta por registro, não é possível escolher o valor mais recente. Há também uma faixa sem título, artista e álbum, com duração zero, 157 faixas com <code>tempo=0</code> e 162 com <code>time_signature=0</code> no recorte global. Esses registros permanecem nas análises descritivas apresentadas.</p>
+    <p><strong>Escopo:</strong> o CSV descreve faixas e não contém interações usuário–item. A similaridade entre atributos ou a correspondência de gêneros não demonstra preferência individual nem qualidade de recomendação personalizada.</p>
   </div>
   <p class="note" style="margin-top:1rem">Fonte: <a href="https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset" target="_blank">Kaggle - Spotify Tracks Dataset</a> (também no Hugging Face). Coletado via Spotify Web API. Linhas originais: 114,000. Duplicatas de <code>track_id</code> removidas: 24,259. Valores faltantes: artists: 1, album_name: 1, track_name: 1.</p>
 </div>
@@ -103,9 +105,9 @@
   <h2>2. Faixas únicas por gênero</h2>
   <div class="method">
     <strong>Método</strong>
-    <p>Contagem de faixas únicas por <code>track_genre</code> após deduplicar o par <code>(track_id, track_genre)</code>. O gráfico mostra os 20 rótulos com menos IDs distintos, destacando os gêneros com maior sobreposição de faixas.</p>
+    <p>Contagem de faixas únicas por <code>track_genre</code> após deduplicar o par <code>(track_id, track_genre)</code>. O gráfico mostra os 20 rótulos com menos IDs distintos, destacando repetições de IDs dentro de cada gênero. Ele não mede a sobreposição de faixas entre gêneros.</p>
   </div>
-  <p class="note">A base original é estratificada: 1.000 linhas por gênero. Após a deduplicação do par, as contagens ficam entre 904 e 1.000, indicando que a maior parte dos gêneros mantém quase todas as faixas exclusivas.</p>
+  <p class="note">A base original é estratificada: 1.000 linhas por gênero. Após a deduplicação do par, as contagens ficam entre 904 e 1.000 IDs distintos dentro de cada gênero. Uma mesma faixa pode aparecer em vários gêneros; essas contagens não representam faixas exclusivas de um rótulo.</p>
   <img src="assets/fig1.png" alt="Faixas únicas por gênero" width="1000">
 </div>
 
@@ -132,7 +134,7 @@
       <li><code>key</code>, <code>mode</code> e <code>time_signature</code> não entram na matriz principal. Apesar de aparecerem numericamente na base, tratá-los diretamente como variáveis contínuas pode produzir interpretações inadequadas.</li>
       <li>Não é necessário normalizar as escalas antes de calcular Pearson: o coeficiente é invariável a mudanças lineares de escala. Assim, o fato de <code>loudness</code> estar em dB e outras features em 0–1 não impede o cálculo.</li>
     </ul>
-    <p><strong>Limitação:</strong> Pearson detecta principalmente relações lineares e pode ser influenciado por distribuições assimétricas e valores extremos. Como verificação de robustez, uma etapa posterior pode comparar estes resultados com a correlação de Spearman.</p>
+    <p><strong>Limitação:</strong> Pearson detecta principalmente relações lineares e pode ser influenciado por distribuições assimétricas e valores extremos.</p>
   </div>
   <img src="assets/fig3.png" alt="Heatmap da matriz de correlação de Pearson" width="900">
 </div>
@@ -156,19 +158,6 @@
     <p>O boxplot resume mediana, quartis e dispersão; diferenças visuais entre gêneros não constituem, por si só, teste de significância estatística.</p>
   </div>
   <img src="assets/fig5.png" alt="Boxplots de popularity por gênero" width="1000">
-</div>
-
-<div class="card">
-  <h2>7. Observações para o TCC</h2>
-  <ul>
-    <li>A base é adequada para experimentos de <strong>recomendação baseada em conteúdo</strong> com audio features e para análises de similaridade entre tracks/gêneros.</li>
-    <li><code>popularity</code> é um score do Spotify (0–100), não um feedback explícito de usuário. Não deve ser tratado como ground-truth de preferência individual.</li>
-    <li>O CSV original possui 1.000 linhas em cada um dos 114 gêneros. Análises por gênero devem deduplicar o par <code>(track_id, track_genre)</code>; deduplicar apenas por <code>track_id</code> atribui a faixa ao primeiro rótulo encontrado no arquivo e apaga gêneros inteiros (como <code>songwriter</code>).</li>
-    <li>Há muitos gêneros; para modelos, pode ser necessário agrupar ou filtrar conforme o recorte do problema.</li>
-    <li>Features como <code>instrumentalness</code> e <code>speechiness</code> apresentam distribuições fortemente assimétricas. Isso importa na escolha de medidas de distância e também motiva comparar Pearson com métodos baseados em postos, como Spearman.</li>
-    <li>Não há dados de interação usuário–item. Qualquer avaliação de recomendação precisará de estratégia alternativa, como similaridade, hold-out por gênero ou coleta própria.</li>
-    <li>A matriz de correlação é uma análise exploratória entre atributos da faixa; ela não demonstra causalidade e não substitui uma avaliação de um sistema de recomendação.</li>
-  </ul>
 </div>
 
 </main>
