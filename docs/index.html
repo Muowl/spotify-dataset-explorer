@@ -102,13 +102,13 @@
 </div>
 
 <div class="card">
-  <h2>2. IDs únicos por gênero</h2>
+  <h2>2. IDs únicos por gênero (20 menores contagens, com empates)</h2>
   <div class="method">
     <strong>Método</strong>
-    <p>Contagem de IDs únicos por <code>track_genre</code> após deduplicar o par <code>(track_id, track_genre)</code>. O gráfico mostra os 20 rótulos com menos IDs distintos, destacando repetições de IDs dentro de cada gênero. Ele não mede a sobreposição de faixas entre gêneros.</p>
+    <p>Contagem de IDs únicos por <code>track_genre</code> após deduplicar o par <code>(track_id, track_genre)</code>. O corte é a 20ª menor contagem: são incluídos todos os rótulos com contagem menor ou igual a ela. Nesta versão, o corte é 996 IDs e o gráfico mostra 21 gêneros, incluindo os quatro empatados nesse valor (comedy, drum-and-bass, power-pop e psych-rock). A ordem é crescente por contagem e alfabética nos empates, de cima para baixo. O gráfico destaca repetições de IDs dentro de cada gênero. Ele não mede a sobreposição de faixas entre gêneros.</p>
   </div>
   <p class="note">O CSV original contém 1.000 linhas por gênero; o critério de seleção dessas linhas não está documentado. Essa organização não comprova amostragem aleatória. Após a deduplicação do par, as contagens ficam entre 904 e 1.000 IDs distintos dentro de cada gênero. Uma mesma faixa pode aparecer em vários gêneros; essas contagens não representam faixas exclusivas de um rótulo.</p>
-  <img src="assets/fig1.png" alt="IDs únicos por gênero" width="1000">
+  <img src="assets/fig1.png" alt="21 gêneros entre as 20 menores contagens de IDs únicos, incluindo empates" width="1000">
 </div>
 
 <div class="card">
@@ -151,14 +151,14 @@
 </div>
 
 <div class="card">
-  <h2>6. Popularity por gênero (12 maiores medianas)</h2>
+  <h2>6. Popularity por gênero (12 maiores medianas, com empates)</h2>
   <div class="method">
     <strong>Método</strong>
-    <p>São selecionados os 12 gêneros com maior mediana de <code>popularity</code> a partir do recorte de pares únicos (<code>track_id</code>, <code>track_genre</code>). Para cada gênero, a distribuição de <code>popularity</code> é apresentada por boxplot e os gêneros são ordenados pela mediana decrescente.</p>
+    <p>A partir dos pares únicos (<code>track_id</code>, <code>track_genre</code>), o corte é a 12ª maior mediana de <code>popularity</code>. São incluídos todos os gêneros com mediana maior ou igual a esse corte. Nesta versão, a mediana de corte é 51 e são exibidos 13 gêneros, incluindo deep-house, emo e psych-rock, empatados nesse valor. Os boxplots são ordenados por mediana decrescente e, nos empates, por rótulo em ordem alfabética.</p>
     <p>As medianas descrevem as faixas selecionadas nesta base, não o catálogo do Spotify nem a preferência dos ouvintes. O critério de seleção das 1.000 linhas por gênero não está documentado; não se presume representatividade.</p>
     <p>O boxplot resume mediana, quartis e dispersão; diferenças visuais entre gêneros não constituem, por si só, teste de significância estatística.</p>
   </div>
-  <img src="assets/fig5.png" alt="Boxplots de popularity por gênero" width="1000">
+  <img src="assets/fig5.png" alt="Boxplots dos 13 gêneros entre as 12 maiores medianas de popularity, incluindo empates" width="1000">
 </div>
 
 </main>

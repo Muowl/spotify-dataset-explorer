@@ -59,3 +59,9 @@ python -m pip install -r requirements.txt
 Para executar o notebook, selecione esse ambiente na sua ferramenta de notebooks e use `notebooks/` como diretório de trabalho. A interface Jupyter/VS Code não faz parte das dependências de cálculo fixadas acima. Os scripts em `scripts/` usam somente a biblioteca padrão e são executados a partir da raiz do repositório.
 
 As figuras publicadas no commit `c310928` foram geradas com **Matplotlib 3.11.2**, conforme os metadados dos PNGs. O ambiente original completo não está registrado. O ambiente acima reproduziu os cálculos auditados, mas **não reproduziu as figuras de forma idêntica em bytes ou pixels**; fontes, dimensões e ordenação de empates podem diferir.
+
+## Regra de apresentação dos empates
+
+Na figura 1, o corte é a 20ª menor contagem de IDs por gênero; todos os gêneros com contagem menor ou igual ao corte entram. Na figura 5, o corte é a 12ª maior mediana de popularity; entram todos os gêneros com mediana maior ou igual ao corte. A ordenação secundária é alfabética por rótulo. No CSV auditado, isso resulta em **21 gêneros** na figura 1 (corte de 996 IDs) e **13** na figura 5 (corte de 51).
+
+Essa regra altera a seleção apresentada: acrescenta `psych-rock` à figura 1 e `emo` à figura 5 em relação ao commit `c310928`, sem mudar as contagens, as medianas ou os recortes de dados. As figuras 1 e 5 foram regeneradas com o ambiente documentado acima; as figuras 2, 3 e 4 permanecem na renderização anterior. As verificações desta manutenção estão em [research/maintenance-verification.md](research/maintenance-verification.md).
