@@ -86,14 +86,14 @@
 <div class="card">
   <h2>1. Visão geral da base</h2>
   <div class="stats">
-    <div class="stat"><strong>89,741</strong><span>tracks (após remover duplicatas de track_id)</span></div>
+    <div class="stat"><strong>89,741</strong><span>IDs únicos (track_id)</span></div>
     <div class="stat"><strong>114</strong><span>gêneros distintos</span></div>
     <div class="stat"><strong>31,437</strong><span>artistas / combinações de artistas</span></div>
-    <div class="stat"><strong>8.6%</strong><span>tracks marcadas como explicit</span></div>
+    <div class="stat"><strong>8.6%</strong><span>IDs marcados como explicit</span></div>
   </div>
   <div class="method">
     <strong>Procedimento de preparação</strong>
-    <p>O CSV original possui 114.000 linhas (1.000 por gênero × 114 gêneros). A análise remove a coluna de índice exportada (<code>Unnamed: 0</code>, quando presente) e aplica dois recortes: para análises globais (features, correlação), elimina duplicatas com base em <code>track_id</code>, resultando em 89.741 faixas únicas; para análises por gênero, deduplica o par <code>(track_id, track_genre)</code>, preservando todos os 114 gêneros.</p>
+    <p>O CSV original possui 114.000 linhas (1.000 por gênero × 114 gêneros). A análise remove a coluna de índice exportada (<code>Unnamed: 0</code>, quando presente) e aplica dois recortes: para análises globais (features, correlação), elimina duplicatas com base em <code>track_id</code>, resultando em 89.741 IDs únicos; para análises por gênero, deduplica o par <code>(track_id, track_genre)</code>, preservando todos os 114 gêneros.</p>
     <p>As análises abaixo são descritivas e exploratórias: procuram caracterizar a base e identificar relações entre atributos, sem interpretar correlação como causalidade.</p>
     <p><strong>Qualidade dos registros:</strong> no CSV auditado, 720 IDs têm valores diferentes de <code>popularity</code> entre suas ocorrências. O recorte global mantém a primeira ocorrência; o recorte por gênero preserva o valor de cada par faixa–gênero. Sem data de coleta por registro, não é possível escolher o valor mais recente. Há também uma faixa sem título, artista e álbum, com duração zero, 157 faixas com <code>tempo=0</code> e 162 com <code>time_signature=0</code> no recorte global. Esses registros permanecem nas análises descritivas apresentadas.</p>
     <p><strong>Escopo:</strong> o CSV descreve faixas e não contém interações usuário–item. A similaridade entre atributos ou a correspondência de gêneros não demonstra preferência individual nem qualidade de recomendação personalizada.</p>
@@ -102,13 +102,13 @@
 </div>
 
 <div class="card">
-  <h2>2. Faixas únicas por gênero</h2>
+  <h2>2. IDs únicos por gênero</h2>
   <div class="method">
     <strong>Método</strong>
-    <p>Contagem de faixas únicas por <code>track_genre</code> após deduplicar o par <code>(track_id, track_genre)</code>. O gráfico mostra os 20 rótulos com menos IDs distintos, destacando repetições de IDs dentro de cada gênero. Ele não mede a sobreposição de faixas entre gêneros.</p>
+    <p>Contagem de IDs únicos por <code>track_genre</code> após deduplicar o par <code>(track_id, track_genre)</code>. O gráfico mostra os 20 rótulos com menos IDs distintos, destacando repetições de IDs dentro de cada gênero. Ele não mede a sobreposição de faixas entre gêneros.</p>
   </div>
-  <p class="note">A base original é estratificada: 1.000 linhas por gênero. Após a deduplicação do par, as contagens ficam entre 904 e 1.000 IDs distintos dentro de cada gênero. Uma mesma faixa pode aparecer em vários gêneros; essas contagens não representam faixas exclusivas de um rótulo.</p>
-  <img src="assets/fig1.png" alt="Faixas únicas por gênero" width="1000">
+  <p class="note">O CSV original contém 1.000 linhas por gênero; o critério de seleção dessas linhas não está documentado. Essa organização não comprova amostragem aleatória. Após a deduplicação do par, as contagens ficam entre 904 e 1.000 IDs distintos dentro de cada gênero. Uma mesma faixa pode aparecer em vários gêneros; essas contagens não representam faixas exclusivas de um rótulo.</p>
+  <img src="assets/fig1.png" alt="IDs únicos por gênero" width="1000">
 </div>
 
 <div class="card">
@@ -154,7 +154,8 @@
   <h2>6. Popularity por gênero (12 maiores medianas)</h2>
   <div class="method">
     <strong>Método</strong>
-    <p>São selecionados os 12 gêneros com maior mediana de <code>popularity</code> a partir do recorte de gêneros únicos (<code>track_id</code>, <code>track_genre</code>). Para cada gênero, a distribuição de <code>popularity</code> é apresentada por boxplot e os gêneros são ordenados pela mediana decrescente.</p>
+    <p>São selecionados os 12 gêneros com maior mediana de <code>popularity</code> a partir do recorte de pares únicos (<code>track_id</code>, <code>track_genre</code>). Para cada gênero, a distribuição de <code>popularity</code> é apresentada por boxplot e os gêneros são ordenados pela mediana decrescente.</p>
+    <p>As medianas descrevem as faixas selecionadas nesta base, não o catálogo do Spotify nem a preferência dos ouvintes. O critério de seleção das 1.000 linhas por gênero não está documentado; não se presume representatividade.</p>
     <p>O boxplot resume mediana, quartis e dispersão; diferenças visuais entre gêneros não constituem, por si só, teste de significância estatística.</p>
   </div>
   <img src="assets/fig5.png" alt="Boxplots de popularity por gênero" width="1000">
