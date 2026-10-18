@@ -32,3 +32,16 @@ Fonte: [CSV oficial da Universidade de Utrecht](https://www2.projects.science.uu
 SHA-256 observado: `32229d7329e1245af3f9bd2e7005f51e1c8582ae1e48b9afa5cacb8cdcb65d71`. `scripts/build_emotify.py` registra a origem e a data e valida o hash antes de gerar `docs/assets/emotify-data.js`. Se a fonte mudar, é necessário conferir a nova entrada antes de atualizar o hash esperado.
 
 Mantenha os CSVs brutos sem edição. Os scripts escrevem os derivados em `docs/assets/`, sem modificar as entradas. Spotify e Emotify são fontes distintas e não são unidos: não há chave de correspondência documentada entre seus registros.
+
+## Limitações conhecidas do Spotify Tracks Dataset
+
+Estas observações se referem ao CSV com o SHA-256 acima, auditado em 17/10/2026 UTC. Não motivam exclusões adicionais de registros nesta exploração.
+
+- **Unidade:** 89.741 são IDs únicos (`track_id`) após manter a primeira ocorrência de cada ID, não gravações únicas comprovadas. Uma gravação pode ter mais de um ID de catálogo.
+- **Coincidências entre IDs distintos:** 9.305 dos 89.741 IDs (10,37%) têm pelo menos outro ID com os nove atributos contínuos idênticos: `danceability`, `energy`, `loudness`, `speechiness`, `acousticness`, `instrumentalness`, `liveness`, `valence` e `tempo`. Já 10.000 IDs (11,14%) repetem a combinação literal de título, artistas e duração (`track_name`, `artists`, `duration_ms`). As porcentagens contam todos os IDs participantes dos grupos, não apenas as linhas excedentes; os conjuntos podem se sobrepor e não devem ser somados. Esse diagnóstico não verificou identidade acústica nem demonstrou vazamento ou inflação de métricas em um experimento.
+- **Seleção:** há 1.000 linhas por gênero, mas o critério de seleção dessas linhas não está documentado no dataset card consultado. Isso não comprova amostragem aleatória ou representatividade do catálogo e dos ouvintes.
+- **Número de gêneros:** o [card do Hugging Face](https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset/blob/635b034f69257814eff850a5c2b3346fe458134f/README.md) cita 125 gêneros; o CSV contém 114.
+- **Condições de uso:** a tag `bsd` é uma declaração do autor do dataset. As condições aplicáveis ao conteúdo de origem Spotify não foram esclarecidas; a tag, sozinha, não comprova autorização para todo uso possível. Consulte também a [política do Spotify](https://developer.spotify.com/policy) antes de definir um novo uso dos dados.
+- **Limite temporal e individual:** o CSV não contém eventos de escuta com usuário e timestamp. `popularity` é um score histórico agregado, não feedback individual. A base, isoladamente, não permite avaliar como a escolha de uma pessoa muda com o dia ou contexto.
+
+A política existente de manter a primeira ocorrência por ID no recorte global e por par `(track_id, track_genre)` no recorte por gênero foi preservada. As coincidências entre IDs, os valores zero e o registro com metadados ausentes permanecem nos dados analisados.
