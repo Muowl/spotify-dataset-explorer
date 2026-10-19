@@ -1,0 +1,67 @@
+{
+  "python": "3.12.14",
+  "versions": {
+    "pandas": "2.2.3",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "seaborn": "0.13.2"
+  },
+  "logs": [
+    {
+      "cell": 2,
+      "stdout": "Python: 3.12.14\nBibliotecas: {'pandas': '2.2.3', 'numpy': '2.3.5', 'scipy': '1.17.0', 'matplotlib': '3.10.8', 'seaborn': '0.13.2'}\nSHA-256: b202fa49909b2d5cef71a04b1d21243cfeb36414535f2ca9272aa646721177bd\nRevisão da fonte: https://huggingface.co/datasets/maharshipandya/spotify-tracks-dataset/resolve/635b034f69257814eff850a5c2b3346fe458134f/dataset.csv\nShape original: (114000, 20)\nGêneros no CSV: 114\nShape após deduplicar track_id: (89741, 20)\nPares únicos (track_id, track_genre): (113550, 20)\n"
+    },
+    {
+      "cell": 4,
+      "stdout": "Gêneros únicos (pares faixa–rótulo): 114\nGêneros se keep-first só por track_id: 113\nArtistas (combinações) únicos: 31437\n\nValores faltantes:\n artists       1\nalbum_name    1\ntrack_name    1\ndtype: int64\n\n% explicit: 8.6\n\nIDs únicos por gênero (após dedup do par):\ncount     114.000000\nmean      996.052632\nstd        11.846244\nmin       904.000000\n25%       998.000000\n50%       999.000000\n75%      1000.000000\nmax      1000.000000\nName: count, dtype: float64\n"
+    },
+    {
+      "cell": 6,
+      "stdout": "Corte da 20ª menor contagem: 996; gêneros com empates: 21\n  track_genre  unique_ids\n      romance         904\n    classical         933\n       german         963\n        dance         965\n   honky-tonk         981\n      iranian         988\n        latin         990\n      hip-hop         991\n         kids         991\n        opera         992\n          edm         993\n      j-dance         993\n       latino         993\n          pop         993\n      new-age         994\n        party         994\n         club         995\n       comedy         996\ndrum-and-bass         996\n    power-pop         996\n   psych-rock         996\n"
+    },
+    {
+      "cell": 8,
+      "stdout": ""
+    },
+    {
+      "cell": 10,
+      "stdout": ""
+    },
+    {
+      "cell": 12,
+      "stdout": ""
+    },
+    {
+      "cell": 14,
+      "stdout": "Corte da 12ª maior mediana: 51; gêneros com empates: 13\n      track_genre  median_popularity\n              pop               66.0\n            k-pop               60.0\n         pop-film               60.0\n          hip-hop               58.0\n            chill               57.0\n            metal               57.0\n           grunge               55.0\n              sad               54.0\n          british               52.0\nprogressive-house               52.0\n       deep-house               51.0\n              emo               51.0\n       psych-rock               51.0\n"
+    },
+    {
+      "script": "build_global_hits.py",
+      "stdout": "Gerado: Alcance global: 8/10 com áudio associado, Metal e subgêneros: 9/10 com áudio associado, Repertório clássico: 8/10 com áudio associado\n"
+    },
+    {
+      "script": "build_emotify.py",
+      "stdout": "Emotify: SHA-256 32229d7329e1245af3f9bd2e7005f51e1c8582ae1e48b9afa5cacb8cdcb65d71; fonte observada em 2026-10-17 UTC (https://www2.projects.science.uu.nl/memotion/emotifydata/data.csv)\n8407 avaliações, 400 trechos; salvo em docs/assets/emotify-data.js\n"
+    }
+  ],
+  "assertions": "passed",
+  "execution": "Seven source cells via sequential exec in fresh Python process; not a Jupyter kernel.",
+  "inputs": {
+    "dataset.csv": "b202fa49909b2d5cef71a04b1d21243cfeb36414535f2ca9272aa646721177bd",
+    "emotify.csv": "32229d7329e1245af3f9bd2e7005f51e1c8582ae1e48b9afa5cacb8cdcb65d71"
+  },
+  "figures": {
+    "fig1.png": {
+      "before": "4cd7ee13fb1ead13af0ac9182487d716046e568c015f8553db6e29160324d54d",
+      "after": "ac6b63d4f7c12860fee293acc5a29a7321b35cbad0a09c5931bf594e97da9742"
+    },
+    "fig5.png": {
+      "before": "8eaf902237d3bf2e3feebae93060b742e4e0938f3659d32f49a9ee2d108b6bf0",
+      "after": "52c969e7faf013066381bcbe97d3b2a33d2f7b5f8897382151f61f0567c830ec"
+    }
+  },
+  "verified_at_utc": "2026-10-18",
+  "sample_random_state": 42,
+  "base_commit": "c310928b1dbea4f1ab0fcf44118ba70aea36f740"
+}

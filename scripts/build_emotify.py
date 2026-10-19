@@ -5,6 +5,8 @@ Uso: baixar data.csv da página oficial para data/emotify.csv e executar
 """
 
 import csv
+import hashlib
+from io import StringIO
 import json
 from collections import Counter
 from pathlib import Path
@@ -12,6 +14,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "data" / "emotify.csv"
 DEST = ROOT / "docs" / "assets" / "emotify-data.js"
+# Bytes obtidos da fonte oficial em 17/10/2026 UTC; hash da cópia reconferido em 18/10/2026 UTC.
+SOURCE_URL = "https://www2.projects.science.uu.nl/memotion/emotifydata/data.csv"
+SOURCE_OBSERVED_AT_UTC = "2026-10-17"
+EXPECTED_SHA256 = "32229d7329e1245af3f9bd2e7005f51e1c8582ae1e48b9afa5cacb8cdcb65d71"
 EMOTIONS = (
     "amazement", "solemnity", "tenderness", "nostalgia", "calmness",
     "power", "joyful_activation", "tension", "sadness",
@@ -20,7 +26,12 @@ REQUIRED = {"track id", "genre", *EMOTIONS, "mood", "liked", "disliked"}
 
 
 def main():
-    with SOURCE.open(encoding="utf-8-sig", newline="") as f:
+    source_bytes = SOURCE.read_bytes()
+    source_sha256 = hashlib.sha256(source_bytes).hexdigest()
+    if source_sha256 != EXPECTED_SHA256:
+        raise ValueError("CSV Emotify diferente da versão observada; confira a origem e refaça a auditoria antes de publicar.")
+    print(f"Emotify: SHA-256 {source_sha256}; fonte observada em {SOURCE_OBSERVED_AT_UTC} UTC ({SOURCE_URL})")
+    with StringIO(source_bytes.decode("utf-8-sig"), newline="") as f:
         reader = csv.DictReader(f, skipinitialspace=True)
         if not reader.fieldnames or not REQUIRED.issubset(reader.fieldnames):
             raise ValueError("Colunas ausentes no CSV oficial do Emotify")

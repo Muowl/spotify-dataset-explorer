@@ -1,0 +1,7 @@
+# Ambiente de cálculo validado com Python 3.12.14.
+# Dependências diretas; não é um lockfile de todas as dependências transitivas.
+pandas==2.2.3
+numpy==2.3.5
+scipy==1.17.0
+matplotlib==3.10.8
+seaborn==0.13.2
